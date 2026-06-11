@@ -6,3 +6,5 @@ dist
 *.local
 .vite
 server/data/*.db
+.playwright-mcp/
+*.png

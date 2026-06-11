@@ -188,3 +188,21 @@ Check the render method of `AllScoresView`.
 [  244303ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
 [  274313ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
 [  274313ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  304302ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  304302ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  334306ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  334306ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  364298ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  364299ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  394310ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  394311ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  424307ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  424307ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  454310ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  454310ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  484300ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  484300ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  514311ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  514311ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  544308ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  544308ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
