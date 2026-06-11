@@ -189,6 +189,9 @@ async function directFetchStandings(): Promise<{
     standings.push({ groupName: group.name, positions });
   }
 
+  // Sort alphabetically by group name
+  standings.sort((a, b) => a.groupName.localeCompare(b.groupName));
+
   return { standings, updatedAt: new Date().toISOString() };
 }
 
@@ -226,7 +229,9 @@ export async function fetchStandings(): Promise<{
   updatedAt: string;
 }> {
   if (getMode() === 'backend') {
-    return backendFetchStandings();
+    const result = await backendFetchStandings();
+    result.standings.sort((a, b) => a.groupName.localeCompare(b.groupName));
+    return result;
   }
   const result = await directFetchStandings();
   directLastPollAt = result.updatedAt;

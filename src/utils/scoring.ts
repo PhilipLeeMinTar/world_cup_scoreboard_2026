@@ -111,6 +111,9 @@ export function calculateScore(
     });
   }
 
+  // Sort details alphabetically by group name
+  details.sort((a, b) => a.groupName.localeCompare(b.groupName));
+
   const totalPoints = details.reduce((sum, d) => sum + d.groupTotal, 0);
 
   return { totalPoints, details };
