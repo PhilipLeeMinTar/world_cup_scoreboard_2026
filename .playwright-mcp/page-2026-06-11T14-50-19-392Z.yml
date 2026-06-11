@@ -1,0 +1,58 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: ⚽
+        - generic [ref=e7]:
+          - heading "World Cup 2026 Scoreboard" [level=3] [ref=e8]
+          - text: USA 🇺🇸 • Canada 🇨🇦 • Mexico 🇲🇽 — Live Betting Competition
+      - generic [ref=e10]: "Max Possible: 96 pts"
+    - main [ref=e11]:
+      - generic [ref=e12]:
+        - tablist [ref=e13]:
+          - tab "🏆 Leaderboard" [ref=e14] [cursor=pointer]
+          - tab "⚽ Group Standings" [ref=e15] [cursor=pointer]
+          - tab "👥 Participants (1)" [selected] [ref=e390]
+          - tab "📊 Detailed Breakdown" [ref=e17] [cursor=pointer]
+        - tabpanel "👥 Participants (1)" [ref=e391]:
+          - generic [ref=e54]:
+            - generic [ref=e56]:
+              - button "plus Add Participant" [active] [ref=e58] [cursor=pointer]:
+                - generic [ref=e59]:
+                  - img "plus" [ref=e60]:
+                    - img [ref=e61]
+                  - generic [ref=e63]: Add Participant
+              - heading "👥 Participants & Predictions" [level=6] [ref=e65]
+            - grid [ref=e73]:
+              - rowgroup [ref=e78]:
+                - row "Name Predictions Actions" [ref=e79]:
+                  - columnheader "Name" [ref=e80]
+                  - columnheader "Predictions" [ref=e81]
+                  - columnheader "Actions" [ref=e82]
+              - rowgroup [ref=e392]:
+                - row "Test Player 12 groups predicted edit Edit delete" [ref=e393]:
+                  - gridcell "Test Player" [ref=e394]:
+                    - strong [ref=e396]: Test Player
+                  - gridcell "12 groups predicted" [ref=e397]:
+                    - generic [ref=e398]: 12 groups predicted
+                  - gridcell "edit Edit delete" [ref=e399]:
+                    - generic [ref=e400]:
+                      - button "edit Edit" [ref=e401] [cursor=pointer]:
+                        - generic [ref=e402]:
+                          - img "edit" [ref=e403]:
+                            - img [ref=e404]
+                          - generic [ref=e407]: Edit
+                      - button "delete" [ref=e408] [cursor=pointer]:
+                        - img "delete" [ref=e410]:
+                          - img [ref=e411]
+    - generic [ref=e51]: "FIFA World Cup 2026 Betting Scoreboard — Scoring: Champion +5 | Runner-up +3 | Advancement Bonus +1"
+  - alert "Added" [ref=e413]:
+    - img "tick_circle" [ref=e416]:
+      - img [ref=e417]
+    - generic [ref=e419]:
+      - generic [ref=e420]:
+        - generic [ref=e421]: Added
+        - generic [ref=e422]: Test Player added to the competition
+      - button "close" [ref=e423] [cursor=pointer]:
+        - img "close" [ref=e425]:
+          - img [ref=e426]

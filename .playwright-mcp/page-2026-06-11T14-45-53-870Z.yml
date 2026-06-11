@@ -1,0 +1,31 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: ⚽
+      - generic [ref=e7]:
+        - heading "World Cup 2026 Scoreboard" [level=3] [ref=e8]
+        - text: USA 🇺🇸 • Canada 🇨🇦 • Mexico 🇲🇽 — Live Betting Competition
+    - generic [ref=e10]: "Max Possible: 96 pts"
+  - main [ref=e11]:
+    - generic [ref=e12]:
+      - tablist [ref=e13]:
+        - tab "🏆 Leaderboard" [selected] [ref=e14]
+        - tab "⚽ Group Standings" [ref=e15] [cursor=pointer]
+        - tab "👥 Participants (0)" [ref=e16] [cursor=pointer]
+        - tab "📊 Detailed Breakdown" [ref=e17] [cursor=pointer]
+      - tabpanel "🏆 Leaderboard" [ref=e19]:
+        - generic [ref=e21]:
+          - heading "🏆 Leaderboard" [level=6] [ref=e25]
+          - generic [ref=e32]:
+            - grid [ref=e33]:
+              - rowgroup [ref=e41]:
+                - row "Rank Participant Total Points Perfect Champions (5pts) Perfect Runner-ups (3pts) Advancement Bonuses (1pts)" [ref=e42]:
+                  - columnheader "Rank" [ref=e43]
+                  - columnheader "Participant" [ref=e44]
+                  - columnheader "Total Points" [ref=e45]
+                  - columnheader "Perfect Champions (5pts)" [ref=e46]
+                  - columnheader "Perfect Runner-ups (3pts)" [ref=e47]
+                  - columnheader "Advancement Bonuses (1pts)" [ref=e48]
+              - rowgroup
+            - generic [ref=e50]: No participants yet
+  - generic [ref=e51]: "FIFA World Cup 2026 Betting Scoreboard — Scoring: Champion +5 | Runner-up +3 | Advancement Bonus +1"

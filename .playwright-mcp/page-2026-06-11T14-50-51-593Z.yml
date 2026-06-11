@@ -1,0 +1,25 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: ⚽
+      - generic [ref=e7]:
+        - heading "World Cup 2026 Scoreboard" [level=3] [ref=e8]
+        - text: USA 🇺🇸 • Canada 🇨🇦 • Mexico 🇲🇽 — Live Betting Competition
+    - generic [ref=e10]: "Max Possible: 96 pts"
+  - main [ref=e11]:
+    - generic [ref=e12]:
+      - tablist [ref=e13]:
+        - tab "🏆 Leaderboard" [ref=e14] [cursor=pointer]
+        - tab "⚽ Group Standings" [ref=e15] [cursor=pointer]
+        - tab "👥 Participants (1)" [ref=e390] [cursor=pointer]
+        - tab "📊 Detailed Breakdown" [active] [selected] [ref=e17]
+      - tabpanel "📊 Detailed Breakdown" [ref=e450]:
+        - generic [ref=e452]:
+          - heading "📊 All Scores Breakdown" [level=6] [ref=e456]
+          - button "Test Player 96 pts" [ref=e460] [cursor=pointer]:
+            - generic [ref=e461]:
+              - strong [ref=e463]: Test Player
+              - generic [ref=e464]: 96 pts
+            - img [ref=e466]:
+              - img [ref=e467]
+  - generic [ref=e51]: "FIFA World Cup 2026 Betting Scoreboard — Scoring: Champion +5 | Runner-up +3 | Advancement Bonus +1"

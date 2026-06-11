@@ -1,0 +1,51 @@
+[     218ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-H6ROQLGZ.js?v=22b82427:21606
+[     466ms] [ERROR] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s 
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:66881:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:67053:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:67688:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:75663:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:37963:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:120222:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:120341:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:98265:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:98254:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:98293:5)
+    at App (http://localhost:5173/src/App.tsx:56:37) @ http://localhost:5173/node_modules/.vite/deps/chunk-H6ROQLGZ.js?v=22b82427:518
+[     467ms] [ERROR] Warning: %s is deprecated in StrictMode. %s was passed an instance of %s which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s findDOMNode findDOMNode ReactResizeObserver 
+    at h6
+    at Typography (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:36081:18)
+    at LocaleConsumer (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:65918:22)
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:66881:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:67053:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:67688:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:75663:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:37963:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:120222:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:120341:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:98265:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:98254:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=e0baa9d7:98293:5)
+    at App (http://localhost:5173/src/App.tsx:56:37) @ http://localhost:5173/node_modules/.vite/deps/chunk-H6ROQLGZ.js?v=22b82427:518
+[  148276ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/src/main.tsx?t=1781189301438:0

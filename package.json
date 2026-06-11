@@ -1,0 +1,34 @@
+{
+  "name": "world-cup-scoreboard-2026",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:client": "vite",
+    "dev:server": "tsx watch server/index.ts",
+    "build": "tsc -b && vite build",
+    "seed": "tsx server/db/seed.ts",
+    "start": "NODE_ENV=production node dist/server/index.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@douyinfe/semi-icons": "^2.78.0",
+    "@douyinfe/semi-ui": "^2.78.0",
+    "@hono/node-server": "^2.0.4",
+    "better-sqlite3": "^12.10.0",
+    "hono": "^4.12.25",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^10.0.3",
+    "tsx": "^4.22.4",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.0"
+  }
+}

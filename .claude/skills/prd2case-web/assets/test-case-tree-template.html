@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Case Visual Tree</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    #chart {
+      width: 100vw;
+      height: 100vh;
+      background: #ffffff;
+    }
+
+    #overlay {
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      border: 1px solid #e5e7eb;
+      background: rgba(255, 255, 255, 0.92);
+      color: #111827;
+      z-index: 9;
+      pointer-events: none;
+    }
+
+    #overlay.err {
+      color: #b91c1c;
+      border-color: #fca5a5;
+      background: rgba(254, 242, 242, 0.94);
+      max-width: 60vw;
+      white-space: pre-wrap;
+    }
+
+    .g6-tooltip {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #111827;
+      background: rgba(255, 255, 255, 0.96);
+      padding: 8px 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    }
+  </style>
+  <script src="https://gw.alipayobjects.com/os/lib/antv/g6/4.8.24/dist/g6.min.js"></script>
+</head>
+<body>
+  <div id="chart"></div>
+  <div id="overlay">Rendering...</div>
+  <script id="embedded-case-json" type="application/json">
+{
+  "code": 0,
+  "msg": null,
+  "data": {
+    "case_form": "json",
+    "case_data": {
+      "data": {
+        "text": "I/O test",
+        "nodeType": 0,
+        "priority": 0
+      },
+      "children": [
+        {
+          "data": {
+            "text": "示例前置条件",
+            "nodeType": 3
+          },
+          "children": [
+            {
+              "data": {
+                "text": "示例操作步骤",
+                "nodeType": 5
+              },
+              "children": [
+                {
+                  "data": {
+                    "text": "示例预期结果",
+                    "nodeType": 4
+                  },
+                  "children": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+  </script>
+
+  <script>
+    /*
+      Paste your JSON into <script id="embedded-case-json" type="application/json">.
+      Accepted shapes:
+      1) { code, msg, data: { case_form, case_data } }
+      2) { data: {...}, children: [...] }
+      3) { type, text, children }
+    */
+    const NODE_TYPE_MAP = {
+      0: "测试点",
+      2: "测试点",
+      3: "前置条件",
+      4: "预期结果",
+      5: "操作步骤",
+      6: "操作步骤",
+      12: "用例标题",
+      13: "预期结果"
+    };
+
+    let graph = null;
+    let customNodeRegistered = false;
+    let idCounter = 0;
+
+    const chartEl = document.getElementById("chart");
+    const overlayEl = document.getElementById("overlay");
+
+    function setOverlay(message, isError) {
+      overlayEl.textContent = message;
+      overlayEl.className = isError ? "err" : "";
+    }
+
+    function isObject(value) {
+      return value !== null && typeof value === "object" && !Array.isArray(value);
+    }
+
+    function mapNodeType(nodeType) {
+      if (typeof nodeType === "number" && Object.prototype.hasOwnProperty.call(NODE_TYPE_MAP, nodeType)) {
+        return NODE_TYPE_MAP[nodeType];
+      }
+      return "";
+    }
+
+    function detectRoot(input) {
+      if (!isObject(input)) {
+        throw new Error("Top-level JSON must be an object.");
+      }
+      if (isObject(input.data) && isObject(input.data.case_data)) return input.data.case_data;
+      if (isObject(input.case_data)) return input.case_data;
+      if (isObject(input.data) && ("children" in input || "nodeType" in input.data || "text" in input.data)) return input;
+      if ("text" in input || "type" in input || "children" in input) return input;
+      throw new Error("Unsupported JSON shape. Expected wrapper(data.case_data), core node({data,children}), or tree node({type,text,children}).");
+    }
+
+    function normalizeNode(rawNode) {
+      if (!isObject(rawNode)) return null;
+
+      const hasGrammarData = isObject(rawNode.data);
+      const nodeData = hasGrammarData ? rawNode.data : rawNode;
+
+      const text = typeof nodeData.text === "string"
+        ? nodeData.text
+        : (typeof nodeData.content === "string" ? nodeData.content : "");
+
+      const mappedType = mapNodeType(nodeData.nodeType);
+      const explicitType = typeof nodeData.type === "string" ? nodeData.type : "";
+      const type = explicitType || mappedType;
+
+      let children = [];
+      if (Array.isArray(rawNode.children)) children = rawNode.children;
+      else if (rawNode.children == null) children = [];
+
+      return {
+        type,
+        text: text || "(empty)",
+        tag: typeof nodeData.tag === "string" ? nodeData.tag : undefined,
+        priority: nodeData.priority,
+        resource: nodeData.resource,
+        hyperlink: nodeData.hyperlink,
+        hyperlinkTitle: nodeData.hyperlinkTitle,
+        children: children.map(normalizeNode).filter(Boolean)
+      };
+    }
+
+    function estimateTextWidth(text, font) {
+      const canvas = estimateTextWidth.canvas || (estimateTextWidth.canvas = document.createElement("canvas"));
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return text.length * 8;
+      ctx.font = font;
+      return ctx.measureText(text).width;
+    }
+
+    function wrapText(text, font, maxWidth) {
+      if (!text) return [""];
+      const rows = [];
+      const paragraphs = String(text).split("\n");
+      for (const paragraph of paragraphs) {
+        if (!paragraph.trim()) {
+          rows.push("");
+          continue;
+        }
+        if (estimateTextWidth(paragraph, font) <= maxWidth) {
+          rows.push(paragraph);
+          continue;
+        }
+        let line = "";
+        for (const ch of paragraph) {
+          const candidate = line + ch;
+          if (estimateTextWidth(candidate, font) <= maxWidth) line = candidate;
+          else {
+            if (line) rows.push(line);
+            line = ch;
+          }
+        }
+        if (line) rows.push(line);
+      }
+      return rows.length ? rows : [""];
+    }
+
+    function toG6Node(node) {
+      const hasChildren = Array.isArray(node.children) && node.children.length > 0;
+      const nodeMaxWidth = hasChildren ? 220 : 420;
+
+      const wrappedType = node.type ? wrapText(node.type, "12px sans-serif", nodeMaxWidth) : [];
+      const wrappedText = wrapText(node.text, "14px sans-serif", nodeMaxWidth);
+
+      const typeWidth = wrappedType.reduce((m, t) => Math.max(m, estimateTextWidth(t, "12px sans-serif")), 0);
+      const textWidth = wrappedText.reduce((m, t) => Math.max(m, estimateTextWidth(t, "14px sans-serif")), 0);
+
+      const width = Math.max(120, Math.min(nodeMaxWidth + 30, Math.max(typeWidth, textWidth) + 30));
+      const height = Math.max(36, 12 + wrappedType.length * 16 + (wrappedType.length ? 4 : 0) + wrappedText.length * 18 + 6);
+
+      const g6Node = {
+        id: "node_" + (++idCounter),
+        type: "mindmap-node",
+        model: {
+          businessType: node.type,
+          text: node.text,
+          tag: node.tag,
+          width,
+          height,
+          wrappedType,
+          wrappedText,
+          meta: {
+            priority: node.priority,
+            resource: node.resource,
+            hyperlink: node.hyperlink,
+            hyperlinkTitle: node.hyperlinkTitle
+          }
+        }
+      };
+
+      if (hasChildren) g6Node.children = node.children.map(toG6Node);
+      return g6Node;
+    }
+
+    function registerCustomNode() {
+      if (customNodeRegistered) return;
+
+      G6.registerNode("mindmap-node", {
+        draw(cfg, group) {
+          const model = cfg.model || {};
+          const children = cfg.children || [];
+          const width = model.width || 140;
+          const height = model.height || 40;
+          const wrappedType = model.wrappedType || [];
+          const wrappedText = model.wrappedText || [];
+          const hasType = wrappedType.length > 0;
+          const hasChildren = children.length > 0;
+          const tag = model.tag;
+
+          let color = { box: "#ffffff", stroke: "#e5e7eb", type: "#64748b", text: "#0f172a", icon: "#2563eb" };
+          if (tag === "<add>") color = { box: "rgba(34,197,94,0.10)", stroke: "#22c55e", type: "#15803d", text: "#166534", icon: "#22c55e" };
+          if (tag === "<del>") color = { box: "rgba(239,68,68,0.10)", stroke: "#ef4444", type: "#b91c1c", text: "#991b1b", icon: "#ef4444" };
+
+          const keyShape = group.addShape("rect", {
+            attrs: {
+              x: 0,
+              y: -height / 2,
+              width,
+              height,
+              radius: 6,
+              fill: color.box,
+              stroke: color.stroke,
+              lineWidth: (tag === "<add>" || tag === "<del>") ? 2 : 1,
+              cursor: "pointer"
+            },
+            name: "main-box"
+          });
+
+          if (tag === "<add>" || tag === "<del>") {
+            group.addShape("circle", {
+              attrs: { x: width - 8, y: -height / 2 + 8, r: 8, fill: tag === "<add>" ? "#22c55e" : "#ef4444", stroke: "#fff", lineWidth: 1 },
+              name: "tag-dot"
+            });
+            group.addShape("text", {
+              attrs: { text: tag === "<add>" ? "+" : "x", x: width - 8, y: -height / 2 + 8, fill: "#fff", fontSize: 10, textAlign: "center", textBaseline: "middle", fontWeight: "bold" },
+              name: "tag-dot-text"
+            });
+          }
+
+          let y = -height / 2 + 10;
+          if (hasType) {
+            wrappedType.forEach((line, i) => {
+              group.addShape("text", {
+                attrs: { text: line, x: 14, y: y + i * 16 + 6, fontSize: 12, fill: color.type, textAlign: "left", textBaseline: "middle" },
+                name: "type-" + i
+              });
+            });
+            y += wrappedType.length * 16 + 2;
+          }
+
+          wrappedText.forEach((line, i) => {
+            group.addShape("text", {
+              attrs: { text: line, x: 14, y: y + i * 18 + 7, fontSize: 14, fontWeight: 500, fill: color.text, textAlign: "left", textBaseline: "middle" },
+              name: "text-" + i
+            });
+          });
+
+          if (hasChildren) {
+            const iconX = width;
+            group.addShape("circle", {
+              attrs: { x: iconX, y: 0, r: 8, stroke: color.icon, fill: "#fff", cursor: "pointer" },
+              name: "collapse-icon-bg"
+            });
+
+            const arrowPath = cfg.collapsed
+              ? `M ${iconX - 2} -3 L ${iconX + 3} 0 L ${iconX - 2} 3 Z`
+              : `M ${iconX + 2} -3 L ${iconX - 3} 0 L ${iconX + 2} 3 Z`;
+
+            group.addShape("path", {
+              attrs: { path: arrowPath, fill: color.icon, cursor: "pointer" },
+              name: "collapse-icon-arrow"
+            });
+          }
+
+          return keyShape;
+        },
+        getAnchorPoints() { return [[0, 0.5], [1, 0.5]]; }
+      }, true);
+
+      customNodeRegistered = true;
+    }
+
+    function createGraph() {
+      registerCustomNode();
+      return new G6.TreeGraph({
+        container: chartEl,
+        width: chartEl.clientWidth || window.innerWidth,
+        height: chartEl.clientHeight || window.innerHeight,
+        modes: {
+          default: [
+            "drag-canvas",
+            "zoom-canvas",
+            {
+              type: "tooltip",
+              formatText(model) {
+                const nodeModel = model.model || {};
+                const parts = [];
+                if (nodeModel.businessType) parts.push("类型: " + nodeModel.businessType);
+                parts.push("内容: " + (nodeModel.text || ""));
+                const meta = nodeModel.meta || {};
+                if (typeof meta.priority !== "undefined") parts.push("优先级: P" + String(meta.priority));
+                if (Array.isArray(meta.resource) && meta.resource.length) parts.push("标签: " + meta.resource.join(", "));
+                if (meta.hyperlink) parts.push((meta.hyperlinkTitle || "链接") + ": " + meta.hyperlink);
+                return parts.join("\n");
+              }
+            }
+          ]
+        },
+        defaultNode: { type: "mindmap-node" },
+        defaultEdge: { type: "cubic-horizontal", style: { stroke: "#4f46e5", lineWidth: 2, strokeOpacity: 0.8 } },
+        layout: {
+          type: "mindmap",
+          direction: "LR",
+          getHGap: () => 120,
+          getVGap: () => 24,
+          getId: d => d.id,
+          getSide: () => "right"
+        },
+        animate: false
+      });
+    }
+
+    function countNodes(node) {
+      if (!node) return 0;
+      const children = Array.isArray(node.children) ? node.children : [];
+      return 1 + children.reduce((sum, c) => sum + countNodes(c), 0);
+    }
+
+    function resolveInputJson() {
+      const embeddedJsonEl = document.getElementById("embedded-case-json");
+      if (!embeddedJsonEl) {
+        throw new Error("Missing <script id=\"embedded-case-json\" type=\"application/json\"> block.");
+      }
+      const raw = embeddedJsonEl.textContent || "";
+      if (!raw.trim()) {
+        throw new Error("Embedded JSON is empty. Paste JSON into #embedded-case-json.");
+      }
+      try {
+        return JSON.parse(raw);
+      } catch (error) {
+        const message = error && error.message ? error.message : String(error);
+        throw new Error("Embedded JSON is invalid: " + message);
+      }
+    }
+
+    async function renderTree() {
+      try {
+        const sourceJson = await resolveInputJson();
+        const rawRoot = detectRoot(sourceJson);
+        const normalized = normalizeNode(rawRoot);
+        if (!normalized) throw new Error("Cannot normalize root node.");
+
+        idCounter = 0;
+        const g6Root = toG6Node(normalized);
+
+        if (graph) {
+          graph.destroy();
+          graph = null;
+        }
+
+        graph = createGraph();
+        graph.data(g6Root);
+        graph.render();
+        graph.fitView(20);
+
+        const count = countNodes(normalized);
+        window.__renderInfo = { ok: true, nodes: count };
+        setOverlay("Nodes: " + count, false);
+      } catch (error) {
+        const message = error && error.message ? error.message : String(error);
+        window.__renderInfo = { ok: false, error: message };
+        setOverlay("Render failed:\n" + message, true);
+      }
+    }
+
+    window.addEventListener("resize", () => {
+      if (!graph) return;
+      graph.changeSize(chartEl.clientWidth || window.innerWidth, chartEl.clientHeight || window.innerHeight);
+      graph.fitView(20);
+    });
+
+    renderTree();
+  </script>
+</body>
+</html>

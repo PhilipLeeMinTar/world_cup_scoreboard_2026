@@ -1,0 +1,128 @@
+{
+  "$schema_comment": "Skill-managed runtime baseline. Do NOT hand-edit unless you are bumping the apitest runtime version per apitest.md §5.",
+  "name": "apitest",
+  "version": "2.3.2",
+  "destination": "tests/integration/apitest",
+  "go_import_path": "<go list -m>/tests/integration/apitest",
+  "source_commit": "5ef88f26147e9bd345167602ee44100af20175d1",
+  "source_repo": "git@code.byted.org:tns/tsop_ms_api.git",
+  "files": [
+    {
+      "name": "README.md",
+      "sha256": "c11c54270fe06b99fa66533207e2a13124d6826355d5f334341ff0ac8b0224c1"
+    },
+    {
+      "name": "agw_path.go",
+      "sha256": "769e7ef1d33a572ee62f8b405913f2bc77d925f8e47e23bcb3ca516eb8402428"
+    },
+    {
+      "name": "agw_path_test.go",
+      "sha256": "70cff65d80e0d04219f0758971fe3ad408a7d2695bfea3f86805ba2c8d870965"
+    },
+    {
+      "name": "assert.go",
+      "sha256": "f64e933bc8de3d733352eb4844efe1f7ba92922a6d38c820931682ab860b9d36"
+    },
+    {
+      "name": "auth.go",
+      "sha256": "7bc4667ef6ced2970811aa89546bfb8587c0f7e1aae79d56e1e4975e2c50166b"
+    },
+    {
+      "name": "env.go",
+      "sha256": "dc89f763ced2a353ae56e4b8b2b83542a726d85cd5d4d2b6f8e3ce5eeeed245a"
+    },
+    {
+      "name": "env_test.go",
+      "sha256": "fde6a42b8ed76356b0aea01431d203d6c182c5a045d2fc2ff04ab49de47d69db"
+    },
+    {
+      "name": "extract.go",
+      "sha256": "e4c2b000461b0956be0eeeaf95db85fa90c7ea3b993559e1f2544f951269429f"
+    },
+    {
+      "name": "facade.go",
+      "sha256": "6e865d2fe0d1960b0e29accab121b92b13d8aecc33f469db9dc439b8320004fe"
+    },
+    {
+      "name": "fixture.go",
+      "sha256": "8db80627fdf5c96ab02a003a3fd0dc9fe21e36eb88046af183160489a463a8dd"
+    },
+    {
+      "name": "gateway.go",
+      "sha256": "33d5f6c0248f00e92fb057a503cc007efce2463c6bb2604242ee4e29ece0815f"
+    },
+    {
+      "name": "header_inject.go",
+      "sha256": "9860b5e5406912362a43fe2875ea73b926ad79bd01c9746aaf4eb48d98180ce8"
+    },
+    {
+      "name": "jsonpath.go",
+      "sha256": "1c757e275b8d36ed3d8577cb944fb6dd82213cd28f4ca119d4b0f35f46773ebe"
+    },
+    {
+      "name": "local_rpc_stub.go",
+      "sha256": "395e0d780521b05bfa927d624deab03bd3a301bfa16c4e2d34c8d0a01b438b28",
+      "repo_overlay_replaced_by": "local_rpc.go"
+    },
+    {
+      "name": "log.go",
+      "sha256": "7c802a9f8a847958822a6e05cb3c64e92d06610b20642d5afcc13638a73c9590"
+    },
+    {
+      "name": "models.go",
+      "sha256": "90ce1216912c7334e7638ab5441c5d32eaa151f0679ba9856929b5f229c35cc8"
+    },
+    {
+      "name": "runner.go",
+      "sha256": "647592b057fcb7d0872bdc50cdc58dab896e41f5389f6ce43c4f8d8d6ea07fda"
+    },
+    {
+      "name": "transport.go",
+      "sha256": "d0eec70cf7f65d0a7ea047dd8c65c3d134794cdeea502e5e826cd685b98a8b23"
+    },
+    {
+      "name": "vars.go",
+      "sha256": "b6886e3b677281e173df06792d55547789be90a32f72247383433e3907919f1e"
+    },
+    {
+      "name": "version.go",
+      "sha256": "741acd2f80c3fc9d519c1aebff6597d1cb882f8c6bafbc2b19f3604b412ef79c"
+    }
+  ],
+  "breaking_changes": [
+    {
+      "from": "2.2.0",
+      "to": "2.3.0",
+      "summary": "HTTP JSONPath AGW fallback: when PathMode is HTTP and the body is an AGW envelope ({code,data,message}), legacy IDL-style paths like $.BaseResp.StatusCode and $.items are retried as $.code and $.data.items. RPC mode unchanged.",
+      "migration_hint": "No generated test changes required. Prefer correct HTTP paths ($.code, $.data.*) in new case.md; fallback keeps old HTTP cases working."
+    },
+    {
+      "from": "2.1.0",
+      "to": "2.2.0",
+      "summary": "Add APITEST_MODE transport abstraction (gateway vs local_rpc). Suite uses Transport instead of a hard-coded GatewayClient; gateway mode still requires APITEST_TOKEN, local_rpc mode skips JWT.",
+      "migration_hint": "No generated test changes required. Repos needing local Kitex RPC add tests/integration/apitest/local_rpc.go (repo overlay) implementing NewLocalRPCTransport and delete/replace local_rpc_stub.go on sync. Set APITEST_MODE=local_rpc and TARGET_IPPORT or .env host to run."
+    },
+    {
+      "from": "2.0.0",
+      "to": "2.1.0",
+      "summary": "Add multi-service .env routing. EnvConfig now supports default_service plus services.<key> bindings, and HTTPRequest/RPCRequest can set Service to route each request to the matching PSM/host/env/branch bundle.",
+      "migration_hint": "Existing flat .env files keep working as services.default. For tests that call multiple PSMs, move routing fields under services.<service_key>, set default_service, and emit Service: \"<service_key>\" on non-default HTTP/RPC requests. Keep auth in auth.yaml."
+    },
+    {
+      "from": "1.1.9",
+      "to": "1.2.0",
+      "summary": "Add fixture helpers (UniqueName, NowSec/Milli/Micro, PastSec/Milli/Micro, FutureSec, RandString, RandInt, PickOne, Sample) for dynamic test data construction and per-env business sample lookup.",
+      "migration_hint": "Additive only — existing tests keep compiling. New tests should use apitest.UniqueName/Now*/Rand*/PickOne for fields with replay collisions or randomness, and declare a package-level `var envSamples = map[string]map[string]string{...}` plus apitest.Sample(t, env, key, envSamples) for env-specific business values that cannot be chained from a List/Query."
+    },
+    {
+      "from": "1.2.1",
+      "to": "2.0.0",
+      "summary": "Path-autonomous spec-directory contract. Generated tests now hard-code the absolute spec directory (resolved via runtime.Caller(0) + relative path) and call NewContextFromSpec(t, specDir). Business auth headers move out of generated Go code into specDir/auth.yaml profiles, addressed via ctx.AuthHeaders() / ctx.AuthHeadersFor(profile). Removed APIs: EnvFromFile, NewContext(t, env). Removed env vars: APITEST_ENV, APITEST_AUTH, APITEST_LOG_DIR (logs always write to specDir/api_test_logs). Only APITEST_TOKEN (paas-gw JWT) remains.",
+      "migration_hint": "1) Replace `env := apitest.EnvFromFile(t); ctx := apitest.NewContext(t, env)` with `ctx := apitest.NewContextFromSpec(t, specDir())` where `specDir()` is a per-package helper using runtime.Caller(0) + filepath.Join(filepath.Dir(thisFile), \"<rel-to-FEATURE_DIR/test>\"). 2) Move every business auth header literal (Cookie, Hex-Auth-Key, Authorization, Hex-Login-User-Info, ...) from inline `Headers:` maps into `<FEATURE_DIR>/test/auth.yaml` under profiles.default (or named profiles + case_profiles for cases needing different identities); replace inline values with `Headers: ctx.AuthHeaders()` or `Headers: ctx.AuthHeadersFor(\"<profile>\")`. 3) Drop all `export APITEST_ENV=...`, `export APITEST_AUTH=...`, `export APITEST_LOG_DIR=...` lines from CI / docs / per-user shell rc — only `APITEST_TOKEN` is still needed. 4) Generated `.env` files no longer carry test_account/cookie even legacy-shaped — remove those keys."
+    }
+  ],
+  "min_skill_contract": "v1",
+  "repo_overlays": [
+    "local_rpc.go"
+  ]
+}

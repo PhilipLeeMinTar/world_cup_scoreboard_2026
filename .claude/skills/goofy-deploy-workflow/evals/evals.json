@@ -1,0 +1,24 @@
+{
+  "skill_name": "goofy-deploy-workflow",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "我现在在目标仓库根目录。帮我用 Goofy Deploy 部署这个通道：channel-id=123456789。就按当前分支最新 commit 发版到线上（cn）。",
+      "expected_output": "应默认 site=cn、action=deploy-new，branch/commit 取当前 git；仅在最终触发部署前做二次确认，不额外追问站点/动作/分支。",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "goofy boe 回滚一下：channel-id=987654321，scm-version=2026.03.18.1。",
+      "expected_output": "应选择 site=boe、action=deploy-version，并在执行 deploy-version 前二次确认关键参数。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "帮我查下部署状态：deploy-id=1122334455（不知道 channel-id）。",
+      "expected_output": "应选择 action=query 并直接给出 get-deployment 查询命令；不应触发“最终确认”部署步骤。",
+      "files": []
+    }
+  ]
+}
+

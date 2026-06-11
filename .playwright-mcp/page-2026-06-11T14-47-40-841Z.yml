@@ -1,0 +1,215 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: ⚽
+        - generic [ref=e7]:
+          - heading "World Cup 2026 Scoreboard" [level=3] [ref=e8]
+          - text: USA 🇺🇸 • Canada 🇨🇦 • Mexico 🇲🇽 — Live Betting Competition
+      - generic [ref=e10]: "Max Possible: 96 pts"
+    - main [ref=e11]:
+      - generic [ref=e12]:
+        - tablist [ref=e13]:
+          - tab "🏆 Leaderboard" [ref=e14] [cursor=pointer]
+          - tab "⚽ Group Standings" [ref=e15] [cursor=pointer]
+          - tab "👥 Participants (0)" [selected] [ref=e16]
+          - tab "📊 Detailed Breakdown" [ref=e17] [cursor=pointer]
+        - tabpanel "👥 Participants (0)" [ref=e568]:
+          - generic [ref=e570]:
+            - generic [ref=e572]:
+              - button "plus Add Participant" [ref=e574] [cursor=pointer]:
+                - generic [ref=e575]:
+                  - img "plus" [ref=e576]:
+                    - img [ref=e577]
+                  - generic [ref=e579]: Add Participant
+              - heading "👥 Participants & Predictions" [level=6] [ref=e581]
+            - generic [ref=e588]:
+              - grid [ref=e589]:
+                - rowgroup [ref=e594]:
+                  - row "Name Predictions Actions" [ref=e595]:
+                    - columnheader "Name" [ref=e596]
+                    - columnheader "Predictions" [ref=e597]
+                    - columnheader "Actions" [ref=e598]
+                - rowgroup
+              - generic [ref=e600]: No participants yet. Add someone to get started!
+    - generic [ref=e51]: "FIFA World Cup 2026 Betting Scoreboard — Scoring: Champion +5 | Runner-up +3 | Advancement Bonus +1"
+  - dialog "Add New Participant" [ref=e603]:
+    - generic [ref=e604]:
+      - heading "Add New Participant" [level=5] [ref=e605]
+      - button "close" [active] [ref=e606] [cursor=pointer]:
+        - img "close" [ref=e608]:
+          - img [ref=e609]
+    - generic [ref=e611]:
+      - generic [ref=e612]:
+        - strong [ref=e614]: Participant Name
+        - textbox "Enter name" [ref=e616]
+      - heading "Predictions" [level=5] [ref=e617]
+      - generic [ref=e618]: Select the champion (1st) and runner-up (2nd) for each group.
+      - grid [ref=e625]:
+        - rowgroup [ref=e630]:
+          - row "Group 🥇 Champion (1st) 🥈 Runner-up (2nd)" [ref=e631]:
+            - columnheader "Group" [ref=e632]
+            - columnheader "🥇 Champion (1st)" [ref=e633]
+            - columnheader "🥈 Runner-up (2nd)" [ref=e634]
+        - rowgroup [ref=e635]:
+          - row "Group A" [ref=e636]:
+            - gridcell "Group A" [ref=e637]:
+              - strong [ref=e639]: Group A
+            - gridcell [ref=e640]:
+              - combobox "selected" [ref=e641] [cursor=pointer]:
+                - generic [ref=e644]: 🇲🇽 Mexico
+                - img [ref=e646]:
+                  - img [ref=e647]
+            - gridcell [ref=e649]:
+              - combobox "selected" [ref=e650] [cursor=pointer]:
+                - generic [ref=e653]: 🇿🇦 South Africa
+                - img [ref=e655]:
+                  - img [ref=e656]
+          - row "Group B" [ref=e658]:
+            - gridcell "Group B" [ref=e659]:
+              - strong [ref=e661]: Group B
+            - gridcell [ref=e662]:
+              - combobox "selected" [ref=e663] [cursor=pointer]:
+                - generic [ref=e666]: 🇨🇦 Canada
+                - img [ref=e668]:
+                  - img [ref=e669]
+            - gridcell [ref=e671]:
+              - combobox "selected" [ref=e672] [cursor=pointer]:
+                - generic [ref=e675]: 🇧🇦 Bosnia and Herzegovina
+                - img [ref=e677]:
+                  - img [ref=e678]
+          - row "Group C" [ref=e680]:
+            - gridcell "Group C" [ref=e681]:
+              - strong [ref=e683]: Group C
+            - gridcell [ref=e684]:
+              - combobox "selected" [ref=e685] [cursor=pointer]:
+                - generic [ref=e688]: 🇧🇷 Brazil
+                - img [ref=e690]:
+                  - img [ref=e691]
+            - gridcell [ref=e693]:
+              - combobox "selected" [ref=e694] [cursor=pointer]:
+                - generic [ref=e697]: 🇲🇦 Morocco
+                - img [ref=e699]:
+                  - img [ref=e700]
+          - row "Group D" [ref=e702]:
+            - gridcell "Group D" [ref=e703]:
+              - strong [ref=e705]: Group D
+            - gridcell [ref=e706]:
+              - combobox "selected" [ref=e707] [cursor=pointer]:
+                - generic [ref=e710]: 🇺🇸 United States
+                - img [ref=e712]:
+                  - img [ref=e713]
+            - gridcell [ref=e715]:
+              - combobox "selected" [ref=e716] [cursor=pointer]:
+                - generic [ref=e719]: 🇵🇾 Paraguay
+                - img [ref=e721]:
+                  - img [ref=e722]
+          - row "Group E" [ref=e724]:
+            - gridcell "Group E" [ref=e725]:
+              - strong [ref=e727]: Group E
+            - gridcell [ref=e728]:
+              - combobox "selected" [ref=e729] [cursor=pointer]:
+                - generic [ref=e732]: 🇩🇪 Germany
+                - img [ref=e734]:
+                  - img [ref=e735]
+            - gridcell [ref=e737]:
+              - combobox "selected" [ref=e738] [cursor=pointer]:
+                - generic [ref=e741]: 🇨🇼 Curaçao
+                - img [ref=e743]:
+                  - img [ref=e744]
+          - row "Group F" [ref=e746]:
+            - gridcell "Group F" [ref=e747]:
+              - strong [ref=e749]: Group F
+            - gridcell [ref=e750]:
+              - combobox "selected" [ref=e751] [cursor=pointer]:
+                - generic [ref=e754]: 🇳🇱 Netherlands
+                - img [ref=e756]:
+                  - img [ref=e757]
+            - gridcell [ref=e759]:
+              - combobox "selected" [ref=e760] [cursor=pointer]:
+                - generic [ref=e763]: 🇯🇵 Japan
+                - img [ref=e765]:
+                  - img [ref=e766]
+          - row "Group G" [ref=e768]:
+            - gridcell "Group G" [ref=e769]:
+              - strong [ref=e771]: Group G
+            - gridcell [ref=e772]:
+              - combobox "selected" [ref=e773] [cursor=pointer]:
+                - generic [ref=e776]: 🇧🇪 Belgium
+                - img [ref=e778]:
+                  - img [ref=e779]
+            - gridcell [ref=e781]:
+              - combobox "selected" [ref=e782] [cursor=pointer]:
+                - generic [ref=e785]: 🇪🇬 Egypt
+                - img [ref=e787]:
+                  - img [ref=e788]
+          - row "Group H" [ref=e790]:
+            - gridcell "Group H" [ref=e791]:
+              - strong [ref=e793]: Group H
+            - gridcell [ref=e794]:
+              - combobox "selected" [ref=e795] [cursor=pointer]:
+                - generic [ref=e798]: 🇪🇸 Spain
+                - img [ref=e800]:
+                  - img [ref=e801]
+            - gridcell [ref=e803]:
+              - combobox "selected" [ref=e804] [cursor=pointer]:
+                - generic [ref=e807]: 🇨🇻 Cabo Verde
+                - img [ref=e809]:
+                  - img [ref=e810]
+          - row "Group I" [ref=e812]:
+            - gridcell "Group I" [ref=e813]:
+              - strong [ref=e815]: Group I
+            - gridcell [ref=e816]:
+              - combobox "selected" [ref=e817] [cursor=pointer]:
+                - generic [ref=e820]: 🇫🇷 France
+                - img [ref=e822]:
+                  - img [ref=e823]
+            - gridcell [ref=e825]:
+              - combobox "selected" [ref=e826] [cursor=pointer]:
+                - generic [ref=e829]: 🇸🇳 Senegal
+                - img [ref=e831]:
+                  - img [ref=e832]
+          - row "Group J" [ref=e834]:
+            - gridcell "Group J" [ref=e835]:
+              - strong [ref=e837]: Group J
+            - gridcell [ref=e838]:
+              - combobox "selected" [ref=e839] [cursor=pointer]:
+                - generic [ref=e842]: 🇦🇷 Argentina
+                - img [ref=e844]:
+                  - img [ref=e845]
+            - gridcell [ref=e847]:
+              - combobox "selected" [ref=e848] [cursor=pointer]:
+                - generic [ref=e851]: 🇩🇿 Algeria
+                - img [ref=e853]:
+                  - img [ref=e854]
+          - row "Group K" [ref=e856]:
+            - gridcell "Group K" [ref=e857]:
+              - strong [ref=e859]: Group K
+            - gridcell [ref=e860]:
+              - combobox "selected" [ref=e861] [cursor=pointer]:
+                - generic [ref=e864]: 🇵🇹 Portugal
+                - img [ref=e866]:
+                  - img [ref=e867]
+            - gridcell [ref=e869]:
+              - combobox "selected" [ref=e870] [cursor=pointer]:
+                - generic [ref=e873]: 🇨🇩 Congo DR
+                - img [ref=e875]:
+                  - img [ref=e876]
+          - row "Group L" [ref=e878]:
+            - gridcell "Group L" [ref=e879]:
+              - strong [ref=e881]: Group L
+            - gridcell [ref=e882]:
+              - combobox "selected" [ref=e883] [cursor=pointer]:
+                - generic [ref=e886]: 🏴󠁧󠁢󠁥󠁮󠁧󠁿 England
+                - img [ref=e888]:
+                  - img [ref=e889]
+            - gridcell [ref=e891]:
+              - combobox "selected" [ref=e892] [cursor=pointer]:
+                - generic [ref=e895]: 🇭🇷 Croatia
+                - img [ref=e897]:
+                  - img [ref=e898]
+    - generic [ref=e901]:
+      - button "cancel" [ref=e902] [cursor=pointer]:
+        - generic [ref=e903]: 取消
+      - button "confirm" [ref=e904] [cursor=pointer]:
+        - generic [ref=e905]: Add Participant

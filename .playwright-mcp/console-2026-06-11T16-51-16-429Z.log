@@ -1,0 +1,252 @@
+[      59ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:21608
+[     148ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `AllScoresView`.  
+    at CollapsePanel (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:60921:5)
+    at AllScoresView (http://localhost:5173/src/components/AllScores.tsx:21:33)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:47:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d933a970:63
+[     152ms] [ERROR] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s 
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:47:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:520
+[     152ms] [ERROR] Warning: %s is deprecated in StrictMode. %s was passed an instance of %s which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s findDOMNode findDOMNode ReactResizeObserver 
+    at h6
+    at Typography (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:36129:18)
+    at LocaleConsumer (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:39114:22)
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:47:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:520
+[  495936ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/teams' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  495936ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/teams:0
+[  524951ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/teams' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  524951ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/teams:0
+[  540848ms] [LOG] App mode: backend @ http://localhost:5173/src/App.tsx?t=1781197217214:58
+[  540851ms] [LOG] App mode: backend @ http://localhost:5173/src/App.tsx?t=1781197217214:58
+[  565517ms] ReferenceError: IconRefresh is not defined
+    at StatusIndicator (http://localhost:5173/src/components/StatusIndicator.tsx?t=1781197241916:109:11)
+    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:11596:26)
+    at updateFunctionComponent (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:14630:28)
+    at beginWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:15972:22)
+    at HTMLUnknownElement.callCallback2 (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3680:22)
+    at Object.invokeGuardedCallbackDev (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3705:24)
+    at invokeGuardedCallback (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3739:39)
+    at beginWork$1 (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19818:15)
+    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19251:20)
+    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19190:13)
+[  565517ms] ReferenceError: IconRefresh is not defined
+    at StatusIndicator (http://localhost:5173/src/components/StatusIndicator.tsx?t=1781197241916:109:11)
+    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:11596:26)
+    at updateFunctionComponent (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:14630:28)
+    at beginWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:15972:22)
+    at HTMLUnknownElement.callCallback2 (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3680:22)
+    at Object.invokeGuardedCallbackDev (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3705:24)
+    at invokeGuardedCallback (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3739:39)
+    at beginWork$1 (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19818:15)
+    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19251:20)
+    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19190:13)
+[  565518ms] [ERROR] The above error occurred in the <StatusIndicator> component:
+
+    at StatusIndicator (http://localhost:5173/src/components/StatusIndicator.tsx?t=1781197241916:19:35)
+    at div
+    at header
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781197217214:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries. @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:14079
+[  565519ms] ReferenceError: IconRefresh is not defined
+    at StatusIndicator (http://localhost:5173/src/components/StatusIndicator.tsx?t=1781197241916:109:11)
+    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:11596:26)
+    at updateFunctionComponent (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:14630:28)
+    at beginWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:15972:22)
+    at beginWork$1 (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19806:22)
+    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19251:20)
+    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19190:13)
+    at renderRootSync (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19169:15)
+    at recoverFromConcurrentError (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:18786:28)
+    at performSyncWorkOnRoot (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:18932:28)
+[  577695ms] [LOG] App mode: backend @ http://localhost:5173/src/App.tsx?t=1781197217214:58
+[  577696ms] [LOG] App mode: backend @ http://localhost:5173/src/App.tsx?t=1781197217214:58
+[  577717ms] ReferenceError: IconRefresh is not defined
+    at StatusIndicator (http://localhost:5173/src/components/StatusIndicator.tsx?t=1781197254089:109:11)
+    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:11596:26)
+    at mountIndeterminateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:14974:21)
+    at beginWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:15962:22)
+    at HTMLUnknownElement.callCallback2 (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3680:22)
+    at Object.invokeGuardedCallbackDev (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3705:24)
+    at invokeGuardedCallback (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3739:39)
+    at beginWork$1 (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19818:15)
+    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19251:20)
+    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19190:13)
+[  577762ms] ReferenceError: IconRefresh is not defined
+    at StatusIndicator (http://localhost:5173/src/components/StatusIndicator.tsx?t=1781197254089:109:11)
+    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:11596:26)
+    at mountIndeterminateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:14974:21)
+    at beginWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:15962:22)
+    at HTMLUnknownElement.callCallback2 (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3680:22)
+    at Object.invokeGuardedCallbackDev (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3705:24)
+    at invokeGuardedCallback (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:3739:39)
+    at beginWork$1 (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19818:15)
+    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19251:20)
+    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19190:13)
+[  577785ms] [ERROR] The above error occurred in the <StatusIndicator> component:
+
+    at StatusIndicator (http://localhost:5173/src/components/StatusIndicator.tsx?t=1781197254089:19:35)
+    at div
+    at header
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781197217214:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries. @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:14079
+[  577786ms] ReferenceError: IconRefresh is not defined
+    at StatusIndicator (http://localhost:5173/src/components/StatusIndicator.tsx?t=1781197254089:109:11)
+    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:11596:26)
+    at mountIndeterminateComponent (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:14974:21)
+    at beginWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:15962:22)
+    at beginWork$1 (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19806:22)
+    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19251:20)
+    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19190:13)
+    at renderRootSync (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:19169:15)
+    at recoverFromConcurrentError (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:18786:28)
+    at performConcurrentWorkOnRoot (http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:18734:30)
+[  600542ms] [LOG] App mode: backend @ http://localhost:5173/src/App.tsx?t=1781197217214:58
+[  600542ms] [LOG] App mode: backend @ http://localhost:5173/src/App.tsx?t=1781197217214:58
+[  661921ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:963
+[  661922ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  664295ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:21608
+[  664336ms] [LOG] App mode: backend @ http://localhost:5173/src/App.tsx:58
+[  664340ms] [LOG] App mode: backend @ http://localhost:5173/src/App.tsx:58
+[  664375ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `AllScoresView`.  
+    at CollapsePanel (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:60921:5)
+    at AllScoresView (http://localhost:5173/src/components/AllScores.tsx:21:33)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d933a970:63
+[  664379ms] [ERROR] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s 
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:520
+[  664379ms] [ERROR] Warning: %s is deprecated in StrictMode. %s was passed an instance of %s which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s findDOMNode findDOMNode ReactResizeObserver 
+    at h6
+    at Typography (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:36129:18)
+    at LocaleConsumer (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:39114:22)
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:520
+[  694345ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/api/status:0
+[  694347ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/api/standings:0

@@ -1,0 +1,378 @@
+[     149ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=05f02d9d:21608
+[     237ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `AllScoresView`.  
+    at CollapsePanel (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:60921:5)
+    at AllScoresView (http://localhost:5173/src/components/AllScores.tsx:21:33)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781191124168:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:105131:5) @ http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=05f02d9d:63
+[     241ms] [ERROR] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s 
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781191124168:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=05f02d9d:520
+[     242ms] [ERROR] Warning: %s is deprecated in StrictMode. %s was passed an instance of %s which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s findDOMNode findDOMNode ReactResizeObserver 
+    at h6
+    at Typography (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:36129:18)
+    at LocaleConsumer (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:39114:22)
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781191124168:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=05f02d9d:520
+[  254947ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:963
+[  255189ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=05f02d9d:21608
+[  255287ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `AllScoresView`.  
+    at CollapsePanel (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:60921:5)
+    at AllScoresView (http://localhost:5173/src/components/AllScores.tsx:21:33)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781191124168:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:105131:5) @ http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=05f02d9d:63
+[  255292ms] [ERROR] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s 
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781191124168:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=05f02d9d:520
+[  255292ms] [ERROR] Warning: %s is deprecated in StrictMode. %s was passed an instance of %s which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s findDOMNode findDOMNode ReactResizeObserver 
+    at h6
+    at Typography (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:36129:18)
+    at LocaleConsumer (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:39114:22)
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781191124168:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=05f02d9d:520
+[ 4019031ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=05f02d9d:21608
+[ 4019123ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `AllScoresView`.  
+    at CollapsePanel (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:60921:5)
+    at AllScoresView (http://localhost:5173/src/components/AllScores.tsx?t=1781195272106:21:33)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781195272106:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:105131:5) @ http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=05f02d9d:63
+[ 4019128ms] [ERROR] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s 
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx?t=1781195272106:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781195272106:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=05f02d9d:520
+[ 4019128ms] [ERROR] Warning: %s is deprecated in StrictMode. %s was passed an instance of %s which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s findDOMNode findDOMNode ReactResizeObserver 
+    at h6
+    at Typography (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:36129:18)
+    at LocaleConsumer (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:39114:22)
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx?t=1781195272106:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781195272106:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=05f02d9d:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=05f02d9d:520
+[ 4600375ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:963
+[ 4600377ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 4603048ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=350c827d:21608
+[ 4603192ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `AllScoresView`.  
+    at CollapsePanel (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:60921:5)
+    at AllScoresView (http://localhost:5173/src/components/AllScores.tsx:21:33)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:71489:5)
+    at App (http://localhost:5173/src/App.tsx:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:105131:5) @ http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=3a245c14:63
+[ 4603202ms] [ERROR] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s 
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:71489:5)
+    at App (http://localhost:5173/src/App.tsx:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=350c827d:520
+[ 4603202ms] [ERROR] Warning: %s is deprecated in StrictMode. %s was passed an instance of %s which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s findDOMNode findDOMNode ReactResizeObserver 
+    at h6
+    at Typography (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:36129:18)
+    at LocaleConsumer (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:39114:22)
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:71489:5)
+    at App (http://localhost:5173/src/App.tsx:57:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=2a4264c4:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=350c827d:520
+[ 5233492ms] [ERROR] [vite] SyntaxError: The requested module '/src/components/GroupStandingsEditor.tsx' does not provide an export named 'GroupStandingsViewer' @ http://localhost:5173/@vite/client:881
+[ 5233493ms] [ERROR] [vite] Failed to reload /src/App.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:881
+[ 5341648ms] [ERROR] WebSocket connection to 'ws://localhost:5173/?token=7JvW7OznOfLq' failed:  @ http://localhost:5173/@vite/client:801
+[ 5341649ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:963
+[ 5341690ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5342693ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5343696ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5344699ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5345704ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5346711ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5347723ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5347861ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/api/standings:0
+[ 5347861ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/api/status:0
+[ 5348742ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5349771ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5350819ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5351889ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5353104ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5354285ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5355950ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[ 5360133ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:21608
+[ 5360270ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `AllScoresView`.  
+    at CollapsePanel (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:60921:5)
+    at AllScoresView (http://localhost:5173/src/components/AllScores.tsx:21:33)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:47:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d933a970:63
+[ 5360276ms] [ERROR] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s 
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:47:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:520
+[ 5360277ms] [ERROR] Warning: %s is deprecated in StrictMode. %s was passed an instance of %s which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s findDOMNode findDOMNode ReactResizeObserver 
+    at h6
+    at Typography (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:36129:18)
+    at LocaleConsumer (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:39114:22)
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:47:37)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:520

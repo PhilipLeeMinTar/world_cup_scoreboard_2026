@@ -1,0 +1,9 @@
+web:
+  url: https://www.bing.com
+
+tasks:
+  - name: Search for weather
+    flow:
+      - ai: Search for "today's weather"
+      - sleep: 3000
+      - aiAssert: The results show weather information

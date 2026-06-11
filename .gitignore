@@ -1,0 +1,8 @@
+.ttadk/
+specs/doc_export/
+node_modules
+dist
+.DS_Store
+*.local
+.vite
+server/data/*.db

@@ -1,0 +1,190 @@
+[     184ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:21608
+[     216ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/api/health:0
+[     216ms] [LOG] App mode: direct @ http://localhost:5173/src/App.tsx?t=1781197509936:58
+[     218ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/api/health:0
+[     218ms] [LOG] App mode: direct @ http://localhost:5173/src/App.tsx?t=1781197509936:58
+[     705ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/teams' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[     705ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/teams:0
+[    1187ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/teams' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[    1188ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/teams:0
+[    1661ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[    1661ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[    1704ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `AllScoresView`.  
+    at CollapsePanel (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:60921:5)
+    at AllScoresView (http://localhost:5173/src/components/AllScores.tsx:21:33)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781197509936:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d933a970:63
+[    1710ms] [ERROR] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s 
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781197509936:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:520
+[    1710ms] [ERROR] Warning: %s is deprecated in StrictMode. %s was passed an instance of %s which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s findDOMNode findDOMNode ReactResizeObserver 
+    at h6
+    at Typography (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:36129:18)
+    at LocaleConsumer (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:39114:22)
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx?t=1781197509936:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:520
+[    2129ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[    2129ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[   30682ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[   30682ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[   60694ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[   60694ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[   73386ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[   73386ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[   90687ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[   90687ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  120692ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  120692ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  132837ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  132837ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  150693ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  150693ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  151305ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:963
+[  151306ms] [ERROR] WebSocket connection to 'ws://localhost:5173/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:5173/@vite/client:1034
+[  153767ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:21608
+[  153809ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/api/health:0
+[  153809ms] [LOG] App mode: direct @ http://localhost:5173/src/App.tsx:58
+[  153811ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/api/health:0
+[  153811ms] [LOG] App mode: direct @ http://localhost:5173/src/App.tsx:58
+[  154284ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/teams' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  154284ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/teams:0
+[  154767ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/teams' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  154767ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/teams:0
+[  155258ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  155258ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  155301ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `AllScoresView`.  
+    at CollapsePanel (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:60921:5)
+    at AllScoresView (http://localhost:5173/src/components/AllScores.tsx:21:33)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d933a970:63
+[  155307ms] [ERROR] Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s 
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:520
+[  155307ms] [ERROR] Warning: %s is deprecated in StrictMode. %s was passed an instance of %s which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node%s findDOMNode findDOMNode ReactResizeObserver 
+    at h6
+    at Typography (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:36129:18)
+    at LocaleConsumer (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:39114:22)
+    at ReactResizeObserver (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40077:5)
+    at Base (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40249:5)
+    at Title (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:40884:13)
+    at div
+    at div
+    at div
+    at div
+    at Card (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:48859:5)
+    at Leaderboard (http://localhost:5173/src/components/Leaderboard.tsx:51:31)
+    at div
+    at CSSAnimation (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:38011:5)
+    at div
+    at TabPane (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93418:5)
+    at div
+    at div
+    at Tabs (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:93537:5)
+    at main
+    at Basic (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71461:13)
+    at Adapter (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71450:30)
+    at section
+    at Layout (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:71489:5)
+    at App (http://localhost:5173/src/App.tsx:48:27)
+    at LocaleProvider (http://localhost:5173/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=d933a970:105131:5) @ http://localhost:5173/node_modules/.vite/deps/chunk-KDCVS43I.js?v=d933a970:520
+[  155749ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  155749ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  184302ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  184303ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  214307ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  214307ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  244303ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  244303ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0
+[  274313ms] [ERROR] Access to fetch at 'https://worldcup26.ir/get/groups' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://localhost:5173/:0
+[  274313ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://worldcup26.ir/get/groups:0

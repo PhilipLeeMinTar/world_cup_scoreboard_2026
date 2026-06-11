@@ -1,0 +1,45 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: ⚽
+      - generic [ref=e7]:
+        - heading "World Cup 2026 Scoreboard" [level=3] [ref=e8]
+        - text: USA 🇺🇸 • Canada 🇨🇦 • Mexico 🇲🇽 — Live Betting Competition
+    - generic [ref=e10]: "Max Possible: 96 pts"
+  - main [ref=e11]:
+    - generic [ref=e12]:
+      - tablist [ref=e13]:
+        - tab "🏆 Leaderboard" [active] [selected] [ref=e14]
+        - tab "⚽ Group Standings" [ref=e15] [cursor=pointer]
+        - tab "👥 Participants (1)" [ref=e390] [cursor=pointer]
+        - tab "📊 Detailed Breakdown" [ref=e17] [cursor=pointer]
+      - tabpanel "🏆 Leaderboard" [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]:
+            - heading "🏆 Leaderboard" [level=6] [ref=e25]
+            - grid [ref=e33]:
+              - rowgroup [ref=e41]:
+                - row "Rank Participant Total Points Perfect Champions (5pts) Perfect Runner-ups (3pts) Advancement Bonuses (1pts)" [ref=e42]:
+                  - columnheader "Rank" [ref=e43]
+                  - columnheader "Participant" [ref=e44]
+                  - columnheader "Total Points" [ref=e45]
+                  - columnheader "Perfect Champions (5pts)" [ref=e46]
+                  - columnheader "Perfect Runner-ups (3pts)" [ref=e47]
+                  - columnheader "Advancement Bonuses (1pts)" [ref=e48]
+              - rowgroup [ref=e428]:
+                - 'row "Tag: 🏆 1st Test Player 96 12/12 12/12 +0" [ref=e429]':
+                  - 'gridcell "Tag: 🏆 1st" [ref=e430]':
+                    - 'generic "Tag: 🏆 1st" [ref=e431]':
+                      - generic [ref=e432]: 🏆 1st
+                  - gridcell "Test Player" [ref=e433]:
+                    - strong [ref=e435]: Test Player
+                  - gridcell "96" [ref=e436]:
+                    - strong [ref=e438]: "96"
+                  - gridcell "12/12" [ref=e439]:
+                    - generic [ref=e441]: 12/12
+                  - gridcell "12/12" [ref=e442]:
+                    - generic [ref=e444]: 12/12
+                  - gridcell "+0" [ref=e445]:
+                    - generic [ref=e447]: "+0"
+          - generic [ref=e449]: Click a participant row to see their detailed score breakdown
+  - generic [ref=e51]: "FIFA World Cup 2026 Betting Scoreboard — Scoring: Champion +5 | Runner-up +3 | Advancement Bonus +1"
