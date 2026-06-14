@@ -151,7 +151,7 @@ export const INITIAL_PARTICIPANTS: Participant[] = [
   },
   {
     id: 'p_page5',
-    name: '谢昀邵',
+    name: '谢昀劭',
     predictions: [
       { groupName: 'A', champion: 'South Korea', runnerUp: 'Mexico' },
       { groupName: 'B', champion: 'Switzerland', runnerUp: 'Canada' },
@@ -169,7 +169,7 @@ export const INITIAL_PARTICIPANTS: Participant[] = [
   },
   {
     id: 'p_page6',
-    name: 'Ahbei',
+    name: '和成',
     predictions: [
       { groupName: 'A', champion: 'Mexico', runnerUp: 'Czechia' },
       { groupName: 'B', champion: 'Bosnia and Herzegovina', runnerUp: 'Canada' },
@@ -187,7 +187,7 @@ export const INITIAL_PARTICIPANTS: Participant[] = [
   },
   {
     id: 'p_seanholee',
-    name: 'SEAN HO LEE',
+    name: 'SEAH HO LEE',
     predictions: [
       { groupName: 'A', champion: 'South Korea', runnerUp: 'Czechia' },
       { groupName: 'B', champion: 'Switzerland', runnerUp: 'Qatar' },
