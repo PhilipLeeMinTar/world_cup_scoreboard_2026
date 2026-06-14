@@ -47,7 +47,7 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(500px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(min(500px, 100%), 1fr))',
         gap: 12,
       }}>
         {standings.map((standing) => (
@@ -83,7 +83,7 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
         </Text>
       }
       style={{ marginBottom: 0, minWidth: 0 }}
-      bodyStyle={{ padding: 0 }}
+      bodyStyle={{ padding: 0, overflow: 'hidden' }}
     >
       <ScrollableTable minWidth={460}>
         <Table
