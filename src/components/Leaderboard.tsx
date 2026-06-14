@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, Tag, Typography, Card } from '@douyinfe/semi-ui';
 import { Participant, ScoreBreakdown } from '../types';
 import { WORLD_CUP_2026_GROUPS } from '../data/groups';
+import { teamZh } from '../data/translations';
 
 const { Text } = Typography;
 
@@ -73,7 +74,7 @@ export function Leaderboard({ leaderboard }: LeaderboardProps) {
 
   return (
     <Card
-      title="🏆 Leaderboard"
+      title="🏆 Leaderboard 排行榜"
       style={{ marginBottom: 20 }}
     >
       <Table
@@ -106,7 +107,10 @@ export function ScoreDetailCard({ participant }: ScoreDetailCardProps) {
       width: 160,
       render: (name: string) => {
         const team = findTeam(name);
-        return team ? <span>{team.flag} {name}</span> : <span>{name}</span>;
+        const zh = teamZh(name);
+        return team
+          ? <span>{team.flag} {name} <span style={{ fontSize: 11, color: 'var(--semi-color-tertiary)' }}>{zh !== name ? zh : ''}</span></span>
+          : <span>{name}</span>;
       },
     },
     {
@@ -115,7 +119,10 @@ export function ScoreDetailCard({ participant }: ScoreDetailCardProps) {
       width: 160,
       render: (name: string) => {
         const team = findTeam(name);
-        return team ? <span>{team.flag} {name}</span> : <span>{name}</span>;
+        const zh = teamZh(name);
+        return team
+          ? <span>{team.flag} {name} <span style={{ fontSize: 11, color: 'var(--semi-color-tertiary)' }}>{zh !== name ? zh : ''}</span></span>
+          : <span>{name}</span>;
       },
     },
     {
@@ -124,7 +131,10 @@ export function ScoreDetailCard({ participant }: ScoreDetailCardProps) {
       width: 160,
       render: (name: string) => {
         const team = findTeam(name);
-        return team ? <span>{team.flag} {name}</span> : <span>{name}</span>;
+        const zh = teamZh(name);
+        return team
+          ? <span>{team.flag} {name} <span style={{ fontSize: 11, color: 'var(--semi-color-tertiary)' }}>{zh !== name ? zh : ''}</span></span>
+          : <span>{name}</span>;
       },
     },
     {
@@ -133,7 +143,10 @@ export function ScoreDetailCard({ participant }: ScoreDetailCardProps) {
       width: 160,
       render: (name: string) => {
         const team = findTeam(name);
-        return team ? <span>{team.flag} {name}</span> : <span>{name}</span>;
+        const zh = teamZh(name);
+        return team
+          ? <span>{team.flag} {name} <span style={{ fontSize: 11, color: 'var(--semi-color-tertiary)' }}>{zh !== name ? zh : ''}</span></span>
+          : <span>{name}</span>;
       },
     },
     {

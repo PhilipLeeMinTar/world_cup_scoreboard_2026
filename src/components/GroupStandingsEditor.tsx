@@ -8,6 +8,7 @@ import {
 import { IconRefresh } from '@douyinfe/semi-icons';
 import { GroupStanding, TeamStats } from '../types';
 import { WORLD_CUP_2026_GROUPS } from '../data/groups';
+import { teamZh } from '../data/translations';
 
 const { Text } = Typography;
 
@@ -25,7 +26,7 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
 
   return (
     <Card
-      title="⚽ Group Standings — Live"
+      title="⚽ Group Standings 小组积分榜 — Live"
       style={{ marginBottom: 20 }}
       headerExtraContent={
         <Button
@@ -61,6 +62,8 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
 }
 
 function GroupTable({ standing }: { standing: GroupStanding }) {
+  const isPlayed = standing.teams ? standing.teams.some((t) => t.mp > 0) : false;
+
   const teams: TeamStats[] = standing.teams && standing.teams.length > 0
     ? standing.teams
     : [1, 2, 3, 4].map((pos) => ({
@@ -82,7 +85,7 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
       bodyStyle={{ padding: 0 }}
     >
       <Table
-        columns={getFullColumns()}
+        columns={getFullColumns(isPlayed)}
         dataSource={dataSource}
         rowKey="key"
         pagination={false}
@@ -93,7 +96,9 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
   );
 }
 
-function getFullColumns() {
+function getFullColumns(isPlayed: boolean) {
+  const dashIfUnplayed = (val: number) => isPlayed ? val : '–';
+
   return [
     {
       title: '#',
@@ -114,9 +119,14 @@ function getFullColumns() {
       dataIndex: 'name',
       render: (name: string) => {
         const team = findTeam(name);
+        const display = team ? `${team.flag} ${team.name}` : name;
+        const zh = teamZh(name);
         return (
-          <span style={team?.name !== name ? {} : undefined}>
-            {team ? `${team.flag} ${team.name}` : name}
+          <span>
+            {display}
+            <span style={{ fontSize: 11, color: 'var(--semi-color-tertiary)', marginLeft: 4 }}>
+              {zh !== name ? zh : ''}
+            </span>
           </span>
         );
       },
@@ -126,54 +136,63 @@ function getFullColumns() {
       dataIndex: 'mp',
       width: 36,
       align: 'center' as const,
+      render: (val: number) => dashIfUnplayed(val),
     },
     {
       title: 'W',
       dataIndex: 'w',
       width: 36,
       align: 'center' as const,
+      render: (val: number) => dashIfUnplayed(val),
     },
     {
       title: 'D',
       dataIndex: 'd',
       width: 36,
       align: 'center' as const,
+      render: (val: number) => dashIfUnplayed(val),
     },
     {
       title: 'L',
       dataIndex: 'l',
       width: 36,
       align: 'center' as const,
+      render: (val: number) => dashIfUnplayed(val),
     },
     {
       title: 'GF',
       dataIndex: 'gf',
       width: 36,
       align: 'center' as const,
+      render: (val: number) => dashIfUnplayed(val),
     },
     {
       title: 'GA',
       dataIndex: 'ga',
       width: 36,
       align: 'center' as const,
+      render: (val: number) => dashIfUnplayed(val),
     },
     {
       title: 'GD',
       dataIndex: 'gd',
       width: 40,
       align: 'center' as const,
-      render: (gd: number) => (
-        <span style={{ fontWeight: gd > 0 ? 600 : gd < 0 ? 600 : 400, color: gd > 0 ? 'var(--semi-color-success)' : gd < 0 ? 'var(--semi-color-danger)' : 'inherit' }}>
-          {gd > 0 ? `+${gd}` : gd}
-        </span>
-      ),
+      render: (gd: number) => {
+        if (!isPlayed) return '–';
+        return (
+          <span style={{ fontWeight: gd > 0 ? 600 : gd < 0 ? 600 : 400, color: gd > 0 ? 'var(--semi-color-success)' : gd < 0 ? 'var(--semi-color-danger)' : 'inherit' }}>
+            {gd > 0 ? `+${gd}` : gd}
+          </span>
+        );
+      },
     },
     {
       title: 'Pts',
       dataIndex: 'pts',
       width: 40,
       align: 'center' as const,
-      render: (pts: number) => <Text strong>{pts}</Text>,
+      render: (pts: number) => isPlayed ? <Text strong>{pts}</Text> : '–',
     },
   ];
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Table, Typography, Collapse } from '@douyinfe/semi-ui';
 import { Participant, ScoreBreakdown, GroupStanding } from '../types';
 import { WORLD_CUP_2026_GROUPS } from '../data/groups';
+import { teamZh } from '../data/translations';
 import { calculateScore } from '../utils/scoring';
 
 const { Title, Text } = Typography;
@@ -19,7 +20,7 @@ export function AllScoresView({ participants, standings, expandedParticipant, on
   }
 
   return (
-    <Card title="📊 All Scores Breakdown" style={{ marginBottom: 20 }}>
+    <Card title="📊 All Scores Breakdown 详细积分" style={{ marginBottom: 20 }}>
       <Collapse
         activeKey={expandedParticipant ? [expandedParticipant] : []}
         onChange={(activeKey: string | string[] | undefined) => {
@@ -93,7 +94,10 @@ function ScoreBreakdownTable({ score }: ScoreBreakdownTableProps) {
       width: 150,
       render: (name: string) => {
         const team = findTeam(name);
-        return team ? <span>{team.flag} {name}</span> : <span>{name}</span>;
+        const zh = teamZh(name);
+        return team
+          ? <span>{team.flag} {name} <span style={{ fontSize: 11, color: 'var(--semi-color-tertiary)' }}>{zh !== name ? zh : ''}</span></span>
+          : <span>{name}</span>;
       },
     },
     {
@@ -102,7 +106,10 @@ function ScoreBreakdownTable({ score }: ScoreBreakdownTableProps) {
       width: 150,
       render: (name: string) => {
         const team = findTeam(name);
-        return team ? <span>{team.flag} {name}</span> : <span>{name}</span>;
+        const zh = teamZh(name);
+        return team
+          ? <span>{team.flag} {name} <span style={{ fontSize: 11, color: 'var(--semi-color-tertiary)' }}>{zh !== name ? zh : ''}</span></span>
+          : <span>{name}</span>;
       },
     },
     {
@@ -111,7 +118,10 @@ function ScoreBreakdownTable({ score }: ScoreBreakdownTableProps) {
       width: 150,
       render: (name: string) => {
         const team = findTeam(name);
-        return team ? <span>{team.flag} {name}</span> : <span>{name}</span>;
+        const zh = teamZh(name);
+        return team
+          ? <span>{team.flag} {name} <span style={{ fontSize: 11, color: 'var(--semi-color-tertiary)' }}>{zh !== name ? zh : ''}</span></span>
+          : <span>{name}</span>;
       },
     },
     {
@@ -120,7 +130,10 @@ function ScoreBreakdownTable({ score }: ScoreBreakdownTableProps) {
       width: 150,
       render: (name: string) => {
         const team = findTeam(name);
-        return team ? <span>{team.flag} {name}</span> : <span>{name}</span>;
+        const zh = teamZh(name);
+        return team
+          ? <span>{team.flag} {name} <span style={{ fontSize: 11, color: 'var(--semi-color-tertiary)' }}>{zh !== name ? zh : ''}</span></span>
+          : <span>{name}</span>;
       },
     },
     {

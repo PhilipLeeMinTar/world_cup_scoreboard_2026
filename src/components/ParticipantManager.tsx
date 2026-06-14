@@ -211,7 +211,7 @@ export function ParticipantManager({ participants, onAdd, onUpdate, onDelete }: 
 
   return (
     <Card
-      title="👥 Participants & Predictions"
+      title="👥 Participants & Predictions 参与者与预测"
       style={{ marginBottom: 20 }}
       headerExtraContent={
         <Button icon={<IconPlus />} theme="solid" onClick={openAddModal}>

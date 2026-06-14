@@ -133,8 +133,28 @@ function App() {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <Spin size="large" tip="Loading scoreboard..." />
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+        color: '#fff',
+        gap: 24,
+      }}>
+        <div style={{ fontSize: 64, animation: 'pulse 1.5s ease-in-out infinite' }}>⚽</div>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>World Cup 2026 Scoreboard</div>
+          <div style={{ fontSize: 14, opacity: 0.7, marginBottom: 20 }}>USA 🇺🇸 • Canada 🇨🇦 • Mexico 🇲🇽</div>
+          <Spin size="large" />
+        </div>
+        <style>{`
+          @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+          }
+        `}</style>
       </div>
     );
   }
@@ -175,7 +195,7 @@ function App() {
 
       <Content style={{ padding: '24px', maxWidth: 1400, margin: '0 auto', width: '100%' }}>
         <Tabs type="button" size="large" style={{ marginBottom: 20 }}>
-          <TabPane tab="🏆 Leaderboard" itemKey="leaderboard">
+          <TabPane tab="🏆 Leaderboard 排行榜" itemKey="leaderboard">
             <Leaderboard leaderboard={leaderboard} />
 
             {expandedParticipant && leaderboard.find(p => p.id === expandedParticipant) && (
@@ -191,7 +211,7 @@ function App() {
             )}
           </TabPane>
 
-          <TabPane tab="⚽ Group Standings" itemKey="standings">
+          <TabPane tab="⚽ Group Standings 小组积分榜" itemKey="standings">
             <GroupStandingsViewer
               standings={standings}
               onRefresh={handleRefresh}
@@ -200,7 +220,7 @@ function App() {
             />
           </TabPane>
 
-          <TabPane tab={`👥 Participants (${participants.length})`} itemKey="participants">
+          <TabPane tab={`👥 Participants 参与者 (${participants.length})`} itemKey="participants">
             <ParticipantManager
               participants={participants}
               onAdd={handleAddParticipant}
@@ -209,7 +229,7 @@ function App() {
             />
           </TabPane>
 
-          <TabPane tab="📊 Detailed Breakdown" itemKey="breakdown">
+          <TabPane tab="📊 Detailed Breakdown 详细积分" itemKey="breakdown">
             <AllScoresView
               participants={participants}
               standings={standings}
