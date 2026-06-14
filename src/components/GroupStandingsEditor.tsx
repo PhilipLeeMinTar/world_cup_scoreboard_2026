@@ -47,7 +47,7 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '1fr',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(500px, 1fr))',
         gap: 12,
         overflow: 'visible',
       }}>
