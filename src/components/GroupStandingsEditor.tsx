@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   Table,
   Typography,
@@ -65,6 +65,63 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
 
 function GroupTable({ standing }: { standing: GroupStanding }) {
   const isPlayed = standing.teams ? standing.teams.some((t) => t.mp > 0) : false;
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrollRatio, setScrollRatio] = useState(0);
+  const [thumbWidth, setThumbWidth] = useState(100);
+
+  const updateScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) {
+      setScrollRatio(0);
+      setThumbWidth(100);
+      return;
+    }
+    setScrollRatio(el.scrollLeft / maxScroll);
+    setThumbWidth(Math.max(30, (el.clientWidth / el.scrollWidth) * 100));
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener('scroll', updateScroll);
+    // Also update on resize
+    const observer = new ResizeObserver(updateScroll);
+    observer.observe(el);
+    updateScroll();
+    return () => {
+      el.removeEventListener('scroll', updateScroll);
+      observer.disconnect();
+ };
+  }, []);
+
+  // Sync custom scrollbar drag to the actual scroll position
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartScrollLeft = useRef(0);
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    isDragging.current = true;
+    dragStartX.current = e.clientX;
+    dragStartScrollLeft.current = scrollRef.current?.scrollLeft || 0;
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDragging.current || !scrollRef.current) return;
+    const el = scrollRef.current;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const trackWidth = el.clientWidth;
+    // Scale pointer movement to scroll offset
+    const scale = maxScroll / trackWidth;
+    const delta = (e.clientX - dragStartX.current) * scale;
+    el.scrollLeft = dragStartScrollLeft.current + delta;
+  };
+
+  const handlePointerUp = () => {
+    isDragging.current = false;
+  };
 
   const teams: TeamStats[] = standing.teams && standing.teams.length > 0
     ? standing.teams
@@ -75,6 +132,7 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
       }));
 
   const dataSource = teams.map((t) => ({ ...t, key: t.name }));
+  const needsScroll = scrollRef.current ? scrollRef.current.scrollWidth > scrollRef.current.clientWidth : false;
 
   return (
     <Card
@@ -84,16 +142,49 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
         </Text>
       }
       style={{ marginBottom: 0, minWidth: 0, overflow: 'visible' }}
-      bodyStyle={{ padding: 0, overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}
+      bodyStyle={{ padding: 0, overflow: 'visible' }}
     >
-      <Table
-        columns={getFullColumns(isPlayed)}
-        dataSource={dataSource}
-        rowKey="key"
-        pagination={false}
-        size="small"
-        style={{ fontSize: 13, minWidth: 460 }}
-      />
+      <div
+        ref={scrollRef}
+        style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}
+        className="group-table-scroll"
+      >
+        <Table
+          columns={getFullColumns(isPlayed)}
+          dataSource={dataSource}
+          rowKey="key"
+          pagination={false}
+          size="small"
+          style={{ fontSize: 13, minWidth: 460 }}
+        />
+      </div>
+      {needsScroll && (
+        <div
+          style={{
+            position: 'relative',
+            height: 20,
+            margin: '0 8px 4px',
+            background: 'var(--semi-color-fill-0)',
+            borderRadius: 4,
+            cursor: 'pointer',
+            touchAction: 'none',
+          }}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+        >
+          <div style={{
+            position: 'absolute',
+            top: 3,
+            height: 14,
+            width: `${thumbWidth}%`,
+            left: `${scrollRatio * (100 - thumbWidth)}%`,
+            background: 'var(--semi-color-fill-2)',
+            borderRadius: 4,
+            transition: isDragging.current ? 'none' : 'left 0.1s ease',
+          }} />
+        </div>
+      )}
     </Card>
   );
 }
