@@ -144,9 +144,21 @@ function App() {
       }}>
         <div style={{ fontSize: 64, animation: 'pulse 1.5s ease-in-out infinite' }}>⚽</div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>Seah Family World Cup 2026 Betting HUAT AH 🧧</div>
-          <div style={{ fontSize: 16, opacity: 0.8 }}>Wishing everyone the best of luck! 祝大家好运！🍀</div>
-          <Spin size="large" />
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
+            <span style={{ fontSize: 22, fontWeight: 700 }}>Seah Family World Cup 2026</span>
+            <span style={{
+              background: 'linear-gradient(135deg, #e94560, #ff6b81)',
+              padding: '2px 10px',
+              borderRadius: 12,
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: '0.5px',
+            }}>
+              HUAT AH 🧧
+            </span>
+          </div>
+          <div style={{ fontSize: 15, opacity: 0.75, fontStyle: 'italic' }}>Wishing everyone the best of luck! 祝大家好运！🍀</div>
+          <div style={{ marginTop: 16 }}><Spin size="large" /></div>
         </div>
         <style>{`
           @keyframes pulse {
@@ -162,32 +174,63 @@ function App() {
     <Layout style={{ minHeight: '100vh' }}>
       <Header style={{
         background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 16px',
+        padding: '16px 20px',
         borderBottom: '3px solid #e94560',
-        flexWrap: 'wrap',
-        gap: 8,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: 28 }}>⚽</span>
-          <div>
-            <Title heading={3} style={{ color: '#fff', margin: 0, fontSize: 18 }}>
-              Seah Family World Cup 2026 Betting HUAT AH 🧧
-            </Title>
-            <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13 }}>
-              Wishing everyone the best of luck! 祝大家好运！🍀
-            </Text>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 12,
+          maxWidth: 1400,
+          margin: '0 auto',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ fontSize: 36, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}>⚽</span>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
+                <Title heading={3} style={{
+                  color: '#fff',
+                  margin: 0,
+                  fontSize: 20,
+                  fontWeight: 700,
+                  textShadow: '0 1px 3px rgba(0,0,0,0.3)',
+                }}>
+                  Seah Family World Cup 2026
+                </Title>
+                <span style={{
+                  background: 'linear-gradient(135deg, #e94560, #ff6b81)',
+                  color: '#fff',
+                  padding: '2px 10px',
+                  borderRadius: 12,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  letterSpacing: '0.5px',
+                  boxShadow: '0 2px 6px rgba(233,69,96,0.4)',
+                }}>
+                  HUAT AH 🧧
+                </span>
+              </div>
+              <Text style={{
+                color: 'rgba(255,255,255,0.65)',
+                fontSize: 12,
+                marginTop: 2,
+                display: 'block',
+                fontStyle: 'italic',
+              }}>
+                Wishing everyone the best of luck! 祝大家好运！🍀
+              </Text>
+            </div>
           </div>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <StatusIndicator
-            status={pollStatus}
-            loading={refreshing}
-            onRefresh={handleRefresh}
-            mode={mode === 'detecting' ? 'direct' : mode}
-          />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <StatusIndicator
+              status={pollStatus}
+              loading={refreshing}
+              onRefresh={handleRefresh}
+              mode={mode === 'detecting' ? 'direct' : mode}
+            />
+          </div>
         </div>
       </Header>
 
