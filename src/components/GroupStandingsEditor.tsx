@@ -27,7 +27,8 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
   return (
     <Card
       title="⚽ Group Standings 小组积分榜 — Live"
-      style={{ marginBottom: 20 }}
+      style={{ marginBottom: 20, overflow: 'visible' }}
+      bodyStyle={{ overflow: 'visible' }}
       headerExtraContent={
         <Button
           icon={<IconRefresh />}
@@ -46,8 +47,9 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(min(480px, 100%), 1fr))',
+        gridTemplateColumns: '1fr',
         gap: 12,
+        overflow: 'visible',
       }}>
         {standings.map((standing) => (
           <GroupTable key={standing.groupName} standing={standing} />
@@ -81,8 +83,8 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
           Group {standing.groupName}
         </Text>
       }
-      style={{ marginBottom: 0, minWidth: 0 }}
-      bodyStyle={{ padding: 0, overflowX: 'auto' }}
+      style={{ marginBottom: 0, minWidth: 0, overflow: 'visible' }}
+      bodyStyle={{ padding: 0, overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}
     >
       <Table
         columns={getFullColumns(isPlayed)}

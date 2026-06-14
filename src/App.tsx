@@ -171,6 +171,11 @@ function App() {
   }
 
   return (
+    <>
+      <style>{`
+        .semi-tabs-pane { overflow-x: visible !important; overflow: visible !important; }
+        .semi-tabs-content { overflow: visible !important; }
+      `}</style>
     <Layout style={{ minHeight: '100vh' }}>
       <Header style={{
         background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
@@ -292,6 +297,7 @@ function App() {
         </Text>
       </Footer>
     </Layout>
+    </>
   );
 }
 
