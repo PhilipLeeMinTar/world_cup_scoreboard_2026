@@ -75,7 +75,8 @@ This triggers a GitHub Actions deployment automatically.
 
 Points are awarded based on how accurately each participant predicts the group standings:
 
-- **Exact match** (correct team in correct position): **3 points**
+- **1st place correctly guessed**: **5 points**
+- **2nd place correctly guessed**: **3 points**
 - **Right team, wrong position** (e.g. predicted champion but they finished 2nd): **1 point**
 - **Wrong team**: **0 points**
 
