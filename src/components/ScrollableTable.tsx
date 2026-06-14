@@ -96,13 +96,14 @@ export function ScrollableTable({ minWidth = 460, children }: ScrollableTablePro
   };
 
   return (
-    <div style={{ overflow: 'visible' }}>
-      {/* Scrollable content area */}
+    <div style={{ position: 'relative' }}>
+      {/* Scrollable content area — this is the width constraint */}
       <div
         ref={scrollRef}
         style={{
           overflowX: 'auto',
           WebkitOverflowScrolling: 'touch',
+          width: '100%',
         }}
       >
         <div style={{ minWidth }}>{children}</div>
