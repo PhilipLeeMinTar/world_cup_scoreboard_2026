@@ -38,4 +38,11 @@ export function initSchema() {
   metaInsert.run('last_poll_status', 'never');
   metaInsert.run('api_source', 'worldcup26.ir');
   metaInsert.run('next_poll_at', '');
+
+  // Migration: add teams_json column to standings if not present
+  try {
+    db.exec('ALTER TABLE standings ADD COLUMN teams_json TEXT');
+  } catch {
+    // Column already exists
+  }
 }

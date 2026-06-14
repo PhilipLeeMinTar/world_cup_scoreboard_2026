@@ -38,13 +38,14 @@ export async function pollStandings(): Promise<{
 
     if (result.standings.length > 0) {
       const upsertStanding = db.prepare(`
-        INSERT INTO standings (group_name, position_1, position_2, position_3, position_4, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO standings (group_name, position_1, position_2, position_3, position_4, teams_json, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(group_name) DO UPDATE SET
           position_1 = excluded.position_1,
           position_2 = excluded.position_2,
           position_3 = excluded.position_3,
           position_4 = excluded.position_4,
+          teams_json = excluded.teams_json,
           updated_at = excluded.updated_at
       `);
 
@@ -55,6 +56,7 @@ export async function pollStandings(): Promise<{
           s.positions[2],
           s.positions[3],
           s.positions[4],
+          s.teams ? JSON.stringify(s.teams) : null,
           now
         );
       }
@@ -126,13 +128,14 @@ export function stopPolling() {
 export function getCurrentStandings(): GroupStanding[] {
   const db = getDb();
   const rows = db
-    .prepare('SELECT group_name, position_1, position_2, position_3, position_4 FROM standings ORDER BY group_name')
+    .prepare('SELECT group_name, position_1, position_2, position_3, position_4, teams_json FROM standings ORDER BY group_name')
     .all() as Array<{
     group_name: string;
     position_1: string;
     position_2: string;
     position_3: string;
     position_4: string;
+    teams_json: string | null;
   }>;
 
   return rows.map((r) => ({
@@ -143,6 +146,7 @@ export function getCurrentStandings(): GroupStanding[] {
       3: r.position_3,
       4: r.position_4,
     },
+    ...(r.teams_json ? { teams: JSON.parse(r.teams_json) } : {}),
   }));
 }
 

@@ -1,13 +1,12 @@
 import React from 'react';
 import {
   Table,
-  Tag,
   Typography,
   Card,
   Button,
 } from '@douyinfe/semi-ui';
 import { IconRefresh } from '@douyinfe/semi-icons';
-import { GroupStanding } from '../types';
+import { GroupStanding, TeamStats } from '../types';
 import { WORLD_CUP_2026_GROUPS } from '../data/groups';
 
 const { Text } = Typography;
@@ -20,59 +19,6 @@ interface GroupStandingsViewerProps {
 }
 
 export function GroupStandingsViewer({ standings, onRefresh, refreshing, updatedAt }: GroupStandingsViewerProps) {
-  const columns = [
-    {
-      title: 'Group',
-      dataIndex: 'groupName',
-      width: 80,
-      render: (name: string) => (
-        <Text strong style={{ fontSize: 16 }}>
-          Group {name}
-        </Text>
-      ),
-    },
-    {
-      title: '🥇 1st',
-      dataIndex: 'positions',
-      key: 'pos1',
-      width: 180,
-      render: (positions: GroupStanding['positions']) => {
-        const team = findTeam(positions[1]);
-        return team ? <span>{team.flag} {team.name}</span> : <span>{positions[1]}</span>;
-      },
-    },
-    {
-      title: '🥈 2nd',
-      dataIndex: 'positions',
-      key: 'pos2',
-      width: 180,
-      render: (positions: GroupStanding['positions']) => {
-        const team = findTeam(positions[2]);
-        return team ? <span>{team.flag} {team.name}</span> : <span>{positions[2]}</span>;
-      },
-    },
-    {
-      title: '3rd',
-      dataIndex: 'positions',
-      key: 'pos3',
-      width: 180,
-      render: (positions: GroupStanding['positions']) => {
-        const team = findTeam(positions[3]);
-        return team ? <span style={{ color: 'var(--semi-color-tertiary)' }}>{team.flag} {team.name}</span> : <span>{positions[3]}</span>;
-      },
-    },
-    {
-      title: '4th',
-      dataIndex: 'positions',
-      key: 'pos4',
-      width: 180,
-      render: (positions: GroupStanding['positions']) => {
-        const team = findTeam(positions[4]);
-        return team ? <span style={{ color: 'var(--semi-color-tertiary)' }}>{team.flag} {team.name}</span> : <span>{positions[4]}</span>;
-      },
-    },
-  ];
-
   const formattedTime = updatedAt
     ? new Date(updatedAt).toLocaleString()
     : 'Not yet synced';
@@ -97,19 +43,139 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
         Click "Refresh Scores" for an immediate update.
       </Text>
 
-      <Table
-        columns={columns}
-        dataSource={standings}
-        rowKey="groupName"
-        pagination={false}
-        size="small"
-      />
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: 12,
+      }}>
+        {standings.map((standing) => (
+          <GroupTable key={standing.groupName} standing={standing} />
+        ))}
+      </div>
 
       <Text type="tertiary" style={{ marginTop: 12, display: 'block', fontSize: 12 }}>
         Last synced: {formattedTime}
       </Text>
     </Card>
   );
+}
+
+function GroupTable({ standing }: { standing: GroupStanding }) {
+  const teams: TeamStats[] = standing.teams && standing.teams.length > 0
+    ? standing.teams
+    : [1, 2, 3, 4].map((pos) => ({
+        name: standing.positions[pos as keyof GroupStanding['positions']],
+        position: pos,
+        mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, gd: 0, pts: 0,
+      }));
+
+  const dataSource = teams.map((t) => ({ ...t, key: t.name }));
+
+  return (
+    <Card
+      title={
+        <Text strong style={{ fontSize: 14 }}>
+          Group {standing.groupName}
+        </Text>
+      }
+      style={{ marginBottom: 0 }}
+      bodyStyle={{ padding: 0 }}
+    >
+      <Table
+        columns={getFullColumns()}
+        dataSource={dataSource}
+        rowKey="key"
+        pagination={false}
+        size="small"
+        style={{ fontSize: 13 }}
+      />
+    </Card>
+  );
+}
+
+function getFullColumns() {
+  return [
+    {
+      title: '#',
+      dataIndex: 'position',
+      width: 32,
+      render: (pos: number) => {
+        const style: React.CSSProperties = {
+          fontWeight: 600,
+          fontSize: 12,
+        };
+        if (pos === 1) style.color = 'var(--semi-color-success)';
+        if (pos === 2) style.color = 'var(--semi-color-success)';
+        return <span style={style}>{pos}</span>;
+      },
+    },
+    {
+      title: 'Team',
+      dataIndex: 'name',
+      render: (name: string) => {
+        const team = findTeam(name);
+        return (
+          <span style={team?.name !== name ? {} : undefined}>
+            {team ? `${team.flag} ${team.name}` : name}
+          </span>
+        );
+      },
+    },
+    {
+      title: 'MP',
+      dataIndex: 'mp',
+      width: 36,
+      align: 'center' as const,
+    },
+    {
+      title: 'W',
+      dataIndex: 'w',
+      width: 36,
+      align: 'center' as const,
+    },
+    {
+      title: 'D',
+      dataIndex: 'd',
+      width: 36,
+      align: 'center' as const,
+    },
+    {
+      title: 'L',
+      dataIndex: 'l',
+      width: 36,
+      align: 'center' as const,
+    },
+    {
+      title: 'GF',
+      dataIndex: 'gf',
+      width: 36,
+      align: 'center' as const,
+    },
+    {
+      title: 'GA',
+      dataIndex: 'ga',
+      width: 36,
+      align: 'center' as const,
+    },
+    {
+      title: 'GD',
+      dataIndex: 'gd',
+      width: 40,
+      align: 'center' as const,
+      render: (gd: number) => (
+        <span style={{ fontWeight: gd > 0 ? 600 : gd < 0 ? 600 : 400, color: gd > 0 ? 'var(--semi-color-success)' : gd < 0 ? 'var(--semi-color-danger)' : 'inherit' }}>
+          {gd > 0 ? `+${gd}` : gd}
+        </span>
+      ),
+    },
+    {
+      title: 'Pts',
+      dataIndex: 'pts',
+      width: 40,
+      align: 'center' as const,
+      render: (pts: number) => <Text strong>{pts}</Text>,
+    },
+  ];
 }
 
 function findTeam(name: string) {

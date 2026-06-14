@@ -1,5 +1,5 @@
 import { apiToOur } from './name-mapping.js';
-import type { GroupStanding } from '../../src/types.js';
+import type { GroupStanding, TeamStats } from '../../src/types.js';
 
 const API_BASE = 'https://worldcup26.ir';
 
@@ -81,7 +81,20 @@ export async function fetchStandingsFromApi(): Promise<{
       4: teamMap.get(sorted[3]?.team_id) || `Team ${sorted[3]?.team_id}`,
     };
 
-    standings.push({ groupName: group.name, positions });
+    const teamsStats: TeamStats[] = sorted.map((t, i) => ({
+      name: teamMap.get(t.team_id) || `Team ${t.team_id}`,
+      position: i + 1,
+      mp: parseInt(t.mp || '0'),
+      w: parseInt(t.w || '0'),
+      d: parseInt(t.d || '0'),
+      l: parseInt(t.l || '0'),
+      gf: parseInt(t.gf || '0'),
+      ga: parseInt(t.ga || '0'),
+      gd: parseInt(t.gd || '0'),
+      pts: parseInt(t.pts || '0'),
+    }));
+
+    standings.push({ groupName: group.name, positions, teams: teamsStats });
   }
 
   return { standings, source: 'worldcup26.ir' };

@@ -9,11 +9,12 @@ A live prediction scoreboard for the 2026 FIFA World Cup. Participants predict w
 ## Features
 
 - **12 groups (A–L)** matching the 2026 World Cup format
+- **Full group tables** with live stats: Pos, MP, W, D, L, GF, GA, GD, Pts
 - **17 participants** with predictions for champion & runner-up of each group
 - **Live standings** fetched from [worldcup26.ir](https://worldcup26.ir) and auto-scored
 - **Leaderboard** ranking participants by points in real time
 - **All Scores** view showing every participant's picks vs actual standings side by side
-- **Participant manager** — add, edit, or remove participants (in dev mode)
+- **Participant manager** — add, edit, or remove participants (in dev mode, sorted alphabetically)
 - **Dual mode:** full backend (local dev) or static GitHub Pages (no server needed)
 
 ## Tech Stack
@@ -91,9 +92,21 @@ Browser → Vite proxy → Hono API → SQLite DB
 
 **GitHub Pages (direct mode):**
 ```
-Browser → worldcup26.ir (standings)
-        → localStorage / participants.ts (predictions)
+Browser → worldcup26.ir (standings with full team stats)
+        → localStorage / participants.ts (predictions, sorted alphabetically)
 ```
+
+### Group Tables
+
+The Group Standings tab shows real football-style tables for all 12 groups. Each table displays:
+
+| # | Team | MP | W | D | L | GF | GA | GD | Pts |
+|---|------|----|---|---|---|----|----|----|-----|
+
+- **GD** is color-coded: green for positive, red for negative
+- Positions 1–2 are highlighted (qualifying positions)
+- Pre-tournament groups show zeroed stats with default team ordering
+- Full stats are preserved from the worldcup26.ir API at every layer (client, server, SQLite)
 
 ## Project Structure
 

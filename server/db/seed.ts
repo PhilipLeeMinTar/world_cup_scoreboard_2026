@@ -13,6 +13,12 @@ function getDefaultStandings(): GroupStanding[] {
       3: g.teams[2].name,
       4: g.teams[3].name,
     },
+    teams: g.teams.map((t, i) => ({
+      name: t.name,
+      position: i + 1,
+      mp: 0, w: 0, d: 0, l: 0,
+      gf: 0, ga: 0, gd: 0, pts: 0,
+    })),
   }));
 }
 
@@ -48,7 +54,7 @@ export function seed() {
   const standingsCount = db.prepare('SELECT COUNT(*) as count FROM standings').get() as { count: number };
   if (standingsCount.count === 0) {
     const insertStanding = db.prepare(
-      'INSERT INTO standings (group_name, position_1, position_2, position_3, position_4, updated_at) VALUES (?, ?, ?, ?, ?, ?)'
+      'INSERT INTO standings (group_name, position_1, position_2, position_3, position_4, teams_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)'
     );
     const now = new Date().toISOString();
     for (const s of getDefaultStandings()) {
@@ -58,6 +64,7 @@ export function seed() {
         s.positions[2],
         s.positions[3],
         s.positions[4],
+        s.teams ? JSON.stringify(s.teams) : null,
         now
       );
     }

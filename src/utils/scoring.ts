@@ -140,6 +140,12 @@ export function getDefaultStandings(): GroupStanding[] {
       3: g.teams[2].name,
       4: g.teams[3].name,
     },
+    teams: g.teams.map((t, i) => ({
+      name: t.name,
+      position: i + 1,
+      mp: 0, w: 0, d: 0, l: 0,
+      gf: 0, ga: 0, gd: 0, pts: 0,
+    })),
   }));
 }
 
