@@ -177,6 +177,7 @@ function ScoreBreakdownTable({ score }: ScoreBreakdownTableProps) {
   ];
 
   return (
+    <div style={{ overflowX: 'auto' }}>
     <Table
       columns={columns}
       dataSource={score.details}
@@ -184,6 +185,7 @@ function ScoreBreakdownTable({ score }: ScoreBreakdownTableProps) {
       pagination={false}
       size="small"
     />
+    </div>
   );
 }
 

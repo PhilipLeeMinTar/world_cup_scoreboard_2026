@@ -84,6 +84,7 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
       style={{ marginBottom: 0 }}
       bodyStyle={{ padding: 0 }}
     >
+      <div style={{ overflowX: 'auto' }}>
       <Table
         columns={getFullColumns(isPlayed)}
         dataSource={dataSource}
@@ -92,6 +93,7 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
         size="small"
         style={{ fontSize: 13 }}
       />
+      </div>
     </Card>
   );
 }

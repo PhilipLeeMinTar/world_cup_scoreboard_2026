@@ -146,7 +146,8 @@ function App() {
         <div style={{ fontSize: 64, animation: 'pulse 1.5s ease-in-out infinite' }}>⚽</div>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>World Cup 2026 Scoreboard</div>
-          <div style={{ fontSize: 14, opacity: 0.7, marginBottom: 20 }}>USA 🇺🇸 • Canada 🇨🇦 • Mexico 🇲🇽</div>
+          <div style={{ fontSize: 14, opacity: 0.7, marginBottom: 8 }}>Seah Family Betting HUAT AH 🧧</div>
+          <div style={{ fontSize: 13, opacity: 0.6 }}>Wishing everyone the best of luck! 祝大家好运！🍀</div>
           <Spin size="large" />
         </div>
         <style>{`
@@ -166,17 +167,22 @@ function App() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 24px',
+        padding: '0 16px',
         borderBottom: '3px solid #e94560',
+        flexWrap: 'wrap',
+        gap: 8,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 32 }}>⚽</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ fontSize: 28 }}>⚽</span>
           <div>
-            <Title heading={3} style={{ color: '#fff', margin: 0 }}>
+            <Title heading={3} style={{ color: '#fff', margin: 0, fontSize: 18 }}>
               World Cup 2026 Scoreboard
             </Title>
-            <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13 }}>
-              USA 🇺🇸 • Canada 🇨🇦 • Mexico 🇲🇽 — Live Betting Competition
+            <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12, display: 'block' }}>
+              Seah Family Betting HUAT AH 🧧
+            </Text>
+            <Text style={{ color: 'rgba(255,255,255,0.5)', fontSize: 10 }}>
+              Wishing everyone the best of luck! 祝大家好运！🍀
             </Text>
           </div>
         </div>
@@ -193,7 +199,7 @@ function App() {
         </div>
       </Header>
 
-      <Content style={{ padding: '24px', maxWidth: 1400, margin: '0 auto', width: '100%' }}>
+      <Content style={{ padding: '16px', maxWidth: 1400, margin: '0 auto', width: '100%' }}>
         <Tabs type="button" size="large" style={{ marginBottom: 20 }}>
           <TabPane tab="🏆 Leaderboard 排行榜" itemKey="leaderboard">
             <Leaderboard leaderboard={leaderboard} />

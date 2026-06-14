@@ -219,6 +219,7 @@ export function ParticipantManager({ participants, onAdd, onUpdate, onDelete }: 
         </Button>
       }
     >
+      <div style={{ overflowX: 'auto' }}>
       <Table
         columns={participantColumns}
         dataSource={participants}
@@ -227,6 +228,7 @@ export function ParticipantManager({ participants, onAdd, onUpdate, onDelete }: 
         size="small"
         empty={<Text type="secondary">No participants yet. Add someone to get started!</Text>}
       />
+      </div>
 
       <Modal
         title={editingParticipant ? `Edit ${editingParticipant.name}'s Predictions` : 'Add New Participant'}
@@ -255,6 +257,7 @@ export function ParticipantManager({ participants, onAdd, onUpdate, onDelete }: 
           Select the champion (1st) and runner-up (2nd) for each group.
         </Text>
 
+        <div style={{ overflowX: 'auto' }}>
         <Table
           columns={predictionColumns}
           dataSource={formPredictions}
@@ -262,6 +265,7 @@ export function ParticipantManager({ participants, onAdd, onUpdate, onDelete }: 
           pagination={false}
           size="small"
         />
+        </div>
       </Modal>
     </Card>
   );

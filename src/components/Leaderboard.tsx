@@ -77,6 +77,7 @@ export function Leaderboard({ leaderboard }: LeaderboardProps) {
       title="🏆 Leaderboard 排行榜"
       style={{ marginBottom: 20 }}
     >
+      <div style={{ overflowX: 'auto' }}>
       <Table
         columns={columns}
         dataSource={leaderboard}
@@ -85,6 +86,7 @@ export function Leaderboard({ leaderboard }: LeaderboardProps) {
         size="small"
         empty={<Text>No participants yet</Text>}
       />
+      </div>
     </Card>
   );
 }
@@ -194,6 +196,7 @@ export function ScoreDetailCard({ participant }: ScoreDetailCardProps) {
       title={`📊 ${participant.name} — ${participant.score.totalPoints} pts`}
       style={{ marginBottom: 20 }}
     >
+      <div style={{ overflowX: 'auto' }}>
       <Table
         columns={columns}
         dataSource={participant.score.details}
@@ -201,6 +204,7 @@ export function ScoreDetailCard({ participant }: ScoreDetailCardProps) {
         pagination={false}
         size="small"
       />
+      </div>
     </Card>
   );
 }
