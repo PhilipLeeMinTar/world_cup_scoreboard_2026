@@ -129,7 +129,7 @@ function App() {
   }, []);
 
   const leaderboard = calculateLeaderboard(participants, standings);
-  const maxPoints = getMaxPossiblePoints();
+  const maxPoints = getMaxPossiblePoints(standings);
 
   if (loading) {
     return (

@@ -45,7 +45,7 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(480px, 1fr))',
         gap: 12,
       }}>
         {standings.map((standing) => (

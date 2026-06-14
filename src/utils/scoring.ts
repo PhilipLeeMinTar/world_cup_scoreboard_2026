@@ -21,6 +21,18 @@ const POINTS_CORRECT_CHAMPION = 5;
 const POINTS_CORRECT_RUNNER_UP = 3;
 const POINTS_ADVANCEMENT_BONUS = 1;
 
+/**
+ * Check if a group has any matches played (at least one team has MP > 0).
+ * Groups with no matches played should not count toward scores.
+ */
+function isGroupPlayed(standing: GroupStanding): boolean {
+  if (standing.teams && standing.teams.length > 0) {
+    return standing.teams.some((t) => t.mp > 0);
+  }
+  // If no teams data, assume unplayed (default standings)
+  return false;
+}
+
 export function calculateScore(
   participant: Participant,
   standings: GroupStanding[]
@@ -31,6 +43,25 @@ export function calculateScore(
     const prediction = participant.predictions.find(
       (p) => p.groupName === standing.groupName
     );
+
+    // Skip unplayed groups — no matches yet means no scoring
+    if (!isGroupPlayed(standing)) {
+      details.push({
+        groupName: standing.groupName,
+        predictedChampion: prediction?.champion || '-',
+        predictedRunnerUp: prediction?.runnerUp || '-',
+        actualChampion: standing.positions[1],
+        actualRunnerUp: standing.positions[2],
+        championPoints: 0,
+        runnerUpPoints: 0,
+        advancementBonus: 0,
+        groupTotal: 0,
+        championReason: 'Not yet played',
+        runnerUpReason: 'Not yet played',
+        advancementReason: 'Not yet played',
+      });
+      continue;
+    }
 
     if (!prediction) {
       details.push({
@@ -157,7 +188,9 @@ export function getDefaultPredictions(): Prediction[] {
   }));
 }
 
-export function getMaxPossiblePoints(): number {
-  // 12 groups, max per group = 5 (champion) + 3 (runner-up) = 8
-  return 12 * (POINTS_CORRECT_CHAMPION + POINTS_CORRECT_RUNNER_UP);
+export function getMaxPossiblePoints(standings?: GroupStanding[]): number {
+  const maxPerGroup = POINTS_CORRECT_CHAMPION + POINTS_CORRECT_RUNNER_UP;
+  if (!standings) return 12 * maxPerGroup;
+  const playedGroups = standings.filter(isGroupPlayed).length;
+  return playedGroups * maxPerGroup;
 }
