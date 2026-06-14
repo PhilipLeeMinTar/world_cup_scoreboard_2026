@@ -197,11 +197,36 @@ async function directFetchStandings(): Promise<{
 
 // LocalStorage helpers for direct mode participants
 const LS_KEY = 'wc2026_direct_participants';
+const LS_VERSION_KEY = 'wc2026_direct_participants_version';
+
+// Simple hash of INITIAL_PARTICIPANTS so we can detect when the bundled
+// data has been updated and invalidate stale localStorage caches.
+function hashParticipants(ps: Participant[]): string {
+  let s = '';
+  for (const p of ps) {
+    s += p.id + '|';
+    for (const pr of p.predictions) {
+      s += pr.groupName + pr.champion + pr.runnerUp;
+    }
+  }
+  // DJB2 hash
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = (h * 33) ^ s.charCodeAt(i);
+  return (h >>> 0).toString(36);
+}
+
+const INITIAL_VERSION = hashParticipants(INITIAL_PARTICIPANTS);
 
 function loadDirectParticipants(): Participant[] {
   try {
+    const storedVersion = localStorage.getItem(LS_VERSION_KEY);
     const stored = localStorage.getItem(LS_KEY);
-    if (stored) return JSON.parse(stored);
+    // If the bundled data version changed, localStorage is stale — reset it
+    if (stored && storedVersion === INITIAL_VERSION) return JSON.parse(stored);
+    if (stored) {
+      localStorage.removeItem(LS_KEY);
+      localStorage.removeItem(LS_VERSION_KEY);
+    }
   } catch { /* ignore */ }
   return INITIAL_PARTICIPANTS;
 }
@@ -209,6 +234,7 @@ function loadDirectParticipants(): Participant[] {
 function saveDirectParticipants(participants: Participant[]) {
   try {
     localStorage.setItem(LS_KEY, JSON.stringify(participants));
+    localStorage.setItem(LS_VERSION_KEY, INITIAL_VERSION);
   } catch { /* ignore */ }
 }
 
