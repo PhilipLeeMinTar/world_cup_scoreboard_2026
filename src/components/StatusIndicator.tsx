@@ -54,27 +54,14 @@ export function StatusIndicator({ status, loading, onRefresh, mode }: StatusIndi
       <div style={{ textAlign: 'right' }}>
         <Text
           style={{
-            color: 'rgba(255,255,255,0.9)',
-            fontSize: 12,
-            display: 'block',
-          }}
-        >
-          {loading
-            ? 'Refreshing...'
-            : isStale
-            ? '⚠️ Data may be stale'
-            : `Live${mode === 'direct' ? '' : ' (server)'} from ${status?.apiSource || 'API'}`}
-        </Text>
-        <Text
-          style={{
             color: 'rgba(255,255,255,0.5)',
-            fontSize: 11,
+            fontSize: 12,
             display: 'block',
           }}
         >
           {lastPoll
             ? `Updated ${formatTime(lastPoll)}${nextPollTime ? ` · Next ${formatTime(nextPollTime)}` : ''}`
-            : 'Not yet synced'}
+            : loading ? 'Refreshing...' : isStale ? '⚠️ Data may be stale' : 'Not yet synced'}
         </Text>
       </div>
       <span

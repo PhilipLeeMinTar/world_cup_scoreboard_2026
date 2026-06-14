@@ -13,7 +13,7 @@ import { Leaderboard, ScoreDetailCard } from './components/Leaderboard';
 import { ParticipantManager } from './components/ParticipantManager';
 import { AllScoresView } from './components/AllScores';
 import { StatusIndicator } from './components/StatusIndicator';
-import { calculateLeaderboard, getMaxPossiblePoints } from './utils/scoring';
+import { calculateLeaderboard } from './utils/scoring';
 import {
   detectMode,
   getMode,
@@ -129,7 +129,6 @@ function App() {
   }, []);
 
   const leaderboard = calculateLeaderboard(participants, standings);
-  const maxPoints = getMaxPossiblePoints(standings);
 
   if (loading) {
     return (
@@ -145,9 +144,8 @@ function App() {
       }}>
         <div style={{ fontSize: 64, animation: 'pulse 1.5s ease-in-out infinite' }}>⚽</div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>World Cup 2026 Scoreboard</div>
-          <div style={{ fontSize: 14, opacity: 0.7, marginBottom: 8 }}>Seah Family Betting HUAT AH 🧧</div>
-          <div style={{ fontSize: 13, opacity: 0.6 }}>Wishing everyone the best of luck! 祝大家好运！🍀</div>
+          <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>Seah Family World Cup 2026 Betting HUAT AH 🧧</div>
+          <div style={{ fontSize: 16, opacity: 0.8 }}>Wishing everyone the best of luck! 祝大家好运！🍀</div>
           <Spin size="large" />
         </div>
         <style>{`
@@ -176,20 +174,14 @@ function App() {
           <span style={{ fontSize: 28 }}>⚽</span>
           <div>
             <Title heading={3} style={{ color: '#fff', margin: 0, fontSize: 18 }}>
-              World Cup 2026 Scoreboard
+              Seah Family World Cup 2026 Betting HUAT AH 🧧
             </Title>
-            <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12, display: 'block' }}>
-              Seah Family Betting HUAT AH 🧧
-            </Text>
-            <Text style={{ color: 'rgba(255,255,255,0.5)', fontSize: 10 }}>
+            <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13 }}>
               Wishing everyone the best of luck! 祝大家好运！🍀
             </Text>
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <Text style={{ color: '#e94560', fontSize: 14, fontWeight: 600 }}>
-            Max: {maxPoints} pts
-          </Text>
           <StatusIndicator
             status={pollStatus}
             loading={refreshing}
