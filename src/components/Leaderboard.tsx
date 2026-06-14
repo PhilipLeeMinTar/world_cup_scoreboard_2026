@@ -3,6 +3,7 @@ import { Table, Tag, Typography, Card } from '@douyinfe/semi-ui';
 import { Participant, ScoreBreakdown } from '../types';
 import { WORLD_CUP_2026_GROUPS } from '../data/groups';
 import { teamZh } from '../data/translations';
+import { ScrollableTable } from './ScrollableTable';
 
 const { Text } = Typography;
 
@@ -77,7 +78,7 @@ export function Leaderboard({ leaderboard }: LeaderboardProps) {
       title="🏆 Leaderboard 排行榜"
       style={{ marginBottom: 20 }}
     >
-      <div style={{ overflowX: 'auto' }}>
+      <ScrollableTable minWidth={600}>
       <Table
         columns={columns}
         dataSource={leaderboard}
@@ -86,7 +87,7 @@ export function Leaderboard({ leaderboard }: LeaderboardProps) {
         size="small"
         empty={<Text>No participants yet</Text>}
       />
-      </div>
+      </ScrollableTable>
     </Card>
   );
 }
@@ -196,7 +197,7 @@ export function ScoreDetailCard({ participant }: ScoreDetailCardProps) {
       title={`📊 ${participant.name} — ${participant.score.totalPoints} pts`}
       style={{ marginBottom: 20 }}
     >
-      <div style={{ overflowX: 'auto' }}>
+      <ScrollableTable minWidth={700}>
       <Table
         columns={columns}
         dataSource={participant.score.details}
@@ -204,7 +205,7 @@ export function ScoreDetailCard({ participant }: ScoreDetailCardProps) {
         pagination={false}
         size="small"
       />
-      </div>
+      </ScrollableTable>
     </Card>
   );
 }

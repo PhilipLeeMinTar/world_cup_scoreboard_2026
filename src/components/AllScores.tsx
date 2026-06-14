@@ -4,6 +4,7 @@ import { Participant, ScoreBreakdown, GroupStanding } from '../types';
 import { WORLD_CUP_2026_GROUPS } from '../data/groups';
 import { teamZh } from '../data/translations';
 import { calculateScore } from '../utils/scoring';
+import { ScrollableTable } from './ScrollableTable';
 
 const { Title, Text } = Typography;
 
@@ -177,7 +178,7 @@ function ScoreBreakdownTable({ score }: ScoreBreakdownTableProps) {
   ];
 
   return (
-    <div style={{ overflowX: 'auto' }}>
+    <ScrollableTable minWidth={700}>
     <Table
       columns={columns}
       dataSource={score.details}
@@ -185,7 +186,7 @@ function ScoreBreakdownTable({ score }: ScoreBreakdownTableProps) {
       pagination={false}
       size="small"
     />
-    </div>
+    </ScrollableTable>
   );
 }
 

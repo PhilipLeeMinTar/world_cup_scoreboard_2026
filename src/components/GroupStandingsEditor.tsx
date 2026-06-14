@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import {
   Table,
   Typography,
@@ -9,6 +9,7 @@ import { IconRefresh } from '@douyinfe/semi-icons';
 import { GroupStanding, TeamStats } from '../types';
 import { WORLD_CUP_2026_GROUPS } from '../data/groups';
 import { teamZh } from '../data/translations';
+import { ScrollableTable } from './ScrollableTable';
 
 const { Text } = Typography;
 
@@ -65,75 +66,6 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
 
 function GroupTable({ standing }: { standing: GroupStanding }) {
   const isPlayed = standing.teams ? standing.teams.some((t) => t.mp > 0) : false;
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [thumbStyle, setThumbStyle] = useState<React.CSSProperties>({ left: 0, width: '100%' });
-  const [showBar, setShowBar] = useState(false);
-  const isDragging = useRef(false);
-
-  const updateThumb = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    const overflow = maxScroll > 0;
-    setShowBar(overflow);
-    if (!overflow) return;
-    const ratio = el.clientWidth / el.scrollWidth;
-    const thumbW = Math.max(25, ratio * 100);
-    const scrollRatio = el.scrollLeft / maxScroll;
-    const left = scrollRatio * (100 - thumbW);
-    setThumbStyle({
-      position: 'absolute',
-      top: 4,
-      height: 20,
-      width: `${thumbW}%`,
-      left: `${left}%`,
-      background: 'var(--semi-color-fill-2)',
-      borderRadius: 6,
-      userSelect: 'none',
-      touchAction: 'none',
-    });
-  };
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.addEventListener('scroll', updateThumb, { passive: true });
-    const observer = new ResizeObserver(updateThumb);
-    observer.observe(el);
-    updateThumb();
-    return () => {
-      el.removeEventListener('scroll', updateThumb);
-      observer.disconnect();
-    };
-  }, []);
-
-  const scrollToPosition = (clientX: number) => {
-    const el = scrollRef.current;
-    const track = trackRef.current;
-    if (!el || !track) return;
-    const rect = track.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-    el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
-  };
-
-  const handlePointerDown = (e: React.PointerEvent) => {
-    e.preventDefault();
-    isDragging.current = true;
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    // Jump to where the user tapped
-    scrollToPosition(e.clientX);
-  };
-
-  const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    scrollToPosition(e.clientX);
-  };
-
-  const handlePointerUp = (e: React.PointerEvent) => {
-    isDragging.current = false;
-  };
 
   const teams: TeamStats[] = standing.teams && standing.teams.length > 0
     ? standing.teams
@@ -144,7 +76,6 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
       }));
 
   const dataSource = teams.map((t) => ({ ...t, key: t.name }));
-  const needsScroll = scrollRef.current ? scrollRef.current.scrollWidth > scrollRef.current.clientWidth : false;
 
   return (
     <Card
@@ -156,40 +87,16 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
       style={{ marginBottom: 0, minWidth: 0, overflow: 'visible' }}
       bodyStyle={{ padding: 0, overflow: 'visible' }}
     >
-      <div
-        ref={scrollRef}
-        style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}
-        className="group-table-scroll"
-      >
+      <ScrollableTable minWidth={460}>
         <Table
           columns={getFullColumns(isPlayed)}
           dataSource={dataSource}
           rowKey="key"
           pagination={false}
           size="small"
-          style={{ fontSize: 13, minWidth: 460 }}
+          style={{ fontSize: 13 }}
         />
-      </div>
-      {showBar && (
-        <div
-          ref={trackRef}
-          style={{
-            position: 'relative',
-            height: 28,
-            margin: '2px 8px 6px',
-            background: 'var(--semi-color-fill-0)',
-            borderRadius: 8,
-            touchAction: 'none',
-            userSelect: 'none',
-          }}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
-        >
-          <div style={thumbStyle} />
-        </div>
-      )}
+      </ScrollableTable>
     </Card>
   );
 }
