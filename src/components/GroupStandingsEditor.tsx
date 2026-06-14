@@ -82,18 +82,16 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
         </Text>
       }
       style={{ marginBottom: 0, minWidth: 0 }}
-      bodyStyle={{ padding: 0, minWidth: 420 }}
+      bodyStyle={{ padding: 0, overflowX: 'auto' }}
     >
-      <div style={{ overflowX: 'auto' }}>
       <Table
         columns={getFullColumns(isPlayed)}
         dataSource={dataSource}
         rowKey="key"
         pagination={false}
         size="small"
-        style={{ fontSize: 13 }}
+        style={{ fontSize: 13, minWidth: 460 }}
       />
-      </div>
     </Card>
   );
 }
