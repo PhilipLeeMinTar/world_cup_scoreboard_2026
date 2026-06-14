@@ -66,60 +66,72 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
 function GroupTable({ standing }: { standing: GroupStanding }) {
   const isPlayed = standing.teams ? standing.teams.some((t) => t.mp > 0) : false;
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [scrollRatio, setScrollRatio] = useState(0);
-  const [thumbWidth, setThumbWidth] = useState(100);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [thumbStyle, setThumbStyle] = useState<React.CSSProperties>({ left: 0, width: '100%' });
+  const [showBar, setShowBar] = useState(false);
+  const isDragging = useRef(false);
 
-  const updateScroll = () => {
+  const updateThumb = () => {
     const el = scrollRef.current;
     if (!el) return;
     const maxScroll = el.scrollWidth - el.clientWidth;
-    if (maxScroll <= 0) {
-      setScrollRatio(0);
-      setThumbWidth(100);
-      return;
-    }
-    setScrollRatio(el.scrollLeft / maxScroll);
-    setThumbWidth(Math.max(30, (el.clientWidth / el.scrollWidth) * 100));
+    const overflow = maxScroll > 0;
+    setShowBar(overflow);
+    if (!overflow) return;
+    const ratio = el.clientWidth / el.scrollWidth;
+    const thumbW = Math.max(25, ratio * 100);
+    const scrollRatio = el.scrollLeft / maxScroll;
+    const left = scrollRatio * (100 - thumbW);
+    setThumbStyle({
+      position: 'absolute',
+      top: 4,
+      height: 20,
+      width: `${thumbW}%`,
+      left: `${left}%`,
+      background: 'var(--semi-color-fill-2)',
+      borderRadius: 6,
+      userSelect: 'none',
+      touchAction: 'none',
+    });
   };
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    el.addEventListener('scroll', updateScroll);
-    // Also update on resize
-    const observer = new ResizeObserver(updateScroll);
+    el.addEventListener('scroll', updateThumb, { passive: true });
+    const observer = new ResizeObserver(updateThumb);
     observer.observe(el);
-    updateScroll();
+    updateThumb();
     return () => {
-      el.removeEventListener('scroll', updateScroll);
+      el.removeEventListener('scroll', updateThumb);
       observer.disconnect();
- };
+    };
   }, []);
 
-  // Sync custom scrollbar drag to the actual scroll position
-  const isDragging = useRef(false);
-  const dragStartX = useRef(0);
-  const dragStartScrollLeft = useRef(0);
+  const scrollToPosition = (clientX: number) => {
+    const el = scrollRef.current;
+    const track = trackRef.current;
+    if (!el || !track) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
+  };
 
   const handlePointerDown = (e: React.PointerEvent) => {
+    e.preventDefault();
     isDragging.current = true;
-    dragStartX.current = e.clientX;
-    dragStartScrollLeft.current = scrollRef.current?.scrollLeft || 0;
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    // Jump to where the user tapped
+    scrollToPosition(e.clientX);
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isDragging.current || !scrollRef.current) return;
-    const el = scrollRef.current;
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    const trackWidth = el.clientWidth;
-    // Scale pointer movement to scroll offset
-    const scale = maxScroll / trackWidth;
-    const delta = (e.clientX - dragStartX.current) * scale;
-    el.scrollLeft = dragStartScrollLeft.current + delta;
+    if (!isDragging.current) return;
+    e.preventDefault();
+    scrollToPosition(e.clientX);
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e: React.PointerEvent) => {
     isDragging.current = false;
   };
 
@@ -158,31 +170,24 @@ function GroupTable({ standing }: { standing: GroupStanding }) {
           style={{ fontSize: 13, minWidth: 460 }}
         />
       </div>
-      {needsScroll && (
+      {showBar && (
         <div
+          ref={trackRef}
           style={{
             position: 'relative',
-            height: 20,
-            margin: '0 8px 4px',
+            height: 28,
+            margin: '2px 8px 6px',
             background: 'var(--semi-color-fill-0)',
-            borderRadius: 4,
-            cursor: 'pointer',
+            borderRadius: 8,
             touchAction: 'none',
+            userSelect: 'none',
           }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
         >
-          <div style={{
-            position: 'absolute',
-            top: 3,
-            height: 14,
-            width: `${thumbWidth}%`,
-            left: `${scrollRatio * (100 - thumbWidth)}%`,
-            background: 'var(--semi-color-fill-2)',
-            borderRadius: 4,
-            transition: isDragging.current ? 'none' : 'left 0.1s ease',
-          }} />
+          <div style={thumbStyle} />
         </div>
       )}
     </Card>
