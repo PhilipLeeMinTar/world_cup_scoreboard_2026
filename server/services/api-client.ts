@@ -1,101 +1,202 @@
-import { apiToOur } from './name-mapping.js';
 import type { GroupStanding, TeamStats } from '../../src/types.js';
 
-const API_BASE = 'https://worldcup26.ir';
+const OPENFOOTBALL_URL =
+  'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
 
-interface ApiTeam {
-  id: string;
-  name_en: string;
-  groups: string;
+// openfootball team name → our internal name
+const API_TO_OUR: Record<string, string> = {
+  'Czech Republic': 'Czechia',
+  'Turkey': 'Türkiye',
+  'Iran': 'IR Iran',
+  'Cape Verde': 'Cabo Verde',
+  'DR Congo': 'Congo DR',
+  'Bosnia & Herzegovina': 'Bosnia and Herzegovina',
+  'USA': 'United States',
+};
+
+function toOur(name: string): string {
+  return API_TO_OUR[name] ?? name;
 }
 
-interface ApiGroupTeam {
-  team_id: string;
-  mp: string;
-  w: string;
-  d: string;
-  l: string;
-  pts: string;
-  gf: string;
-  ga: string;
-  gd: string;
+interface MatchScore {
+  ft?: [number, number];
 }
 
-interface ApiGroup {
-  name: string;
-  teams: ApiGroupTeam[];
+interface Match {
+  group?: string;
+  team1: string;
+  team2: string;
+  score?: MatchScore;
+}
+
+interface TeamRecord {
+  mp: number;
+  w: number;
+  d: number;
+  l: number;
+  gf: number;
+  ga: number;
 }
 
 /**
- * Fetch current group standings from the World Cup API.
- * Returns mapped GroupStanding[] using our internal team names.
+ * Compute standings from raw match results following FIFA tiebreaker order:
+ * 1. Points
+ * 2. Goal difference (all group matches)
+ * 3. Goals scored (all group matches)
+ * 4. Head-to-head points among tied teams
+ * 5. Head-to-head goal difference among tied teams
+ * 6. Head-to-head goals scored among tied teams
+ */
+function computeStandings(matches: Match[]): GroupStanding[] {
+  // Group matches by group name, only those with final scores
+  const groupMatches = new Map<string, Match[]>();
+  for (const m of matches) {
+    if (!m.group || !m.group.startsWith('Group ') || !m.score?.ft) continue;
+    const g = m.group.replace('Group ', '');
+    if (!groupMatches.has(g)) groupMatches.set(g, []);
+    groupMatches.get(g)!.push(m);
+  }
+
+  const standings: GroupStanding[] = [];
+
+  for (const [groupName, gMatches] of groupMatches) {
+    // Collect all teams in this group
+    const teamNames = new Set<string>();
+    for (const m of gMatches) {
+      teamNames.add(toOur(m.team1));
+      teamNames.add(toOur(m.team2));
+    }
+
+    // Build records from match results
+    const records = new Map<string, TeamRecord>();
+    for (const name of teamNames) {
+      records.set(name, { mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0 });
+    }
+
+    for (const m of gMatches) {
+      const t1 = toOur(m.team1);
+      const t2 = toOur(m.team2);
+      const [g1, g2] = m.score!.ft!;
+      const r1 = records.get(t1)!;
+      const r2 = records.get(t2)!;
+
+      r1.mp++; r1.gf += g1; r1.ga += g2;
+      r2.mp++; r2.gf += g2; r2.ga += g1;
+
+      if (g1 > g2) { r1.w++; r2.l++; }
+      else if (g1 < g2) { r1.l++; r2.w++; }
+      else { r1.d++; r2.d++; }
+    }
+
+    const pts = (r: TeamRecord) => r.w * 3 + r.d;
+    const gd = (r: TeamRecord) => r.gf - r.ga;
+
+    // Head-to-head stats between a subset of teams
+    function h2h(tied: string[]): Map<string, { pts: number; gd: number; gf: number }> {
+      const result = new Map<string, { pts: number; gd: number; gf: number }>();
+      for (const t of tied) result.set(t, { pts: 0, gd: 0, gf: 0 });
+
+      for (const m of gMatches) {
+        const t1 = toOur(m.team1);
+        const t2 = toOur(m.team2);
+        if (!tied.includes(t1) || !tied.includes(t2)) continue;
+        const [g1, g2] = m.score!.ft!;
+        const r1 = result.get(t1)!;
+        const r2 = result.get(t2)!;
+
+        r1.gf += g1; r1.gd += g1 - g2;
+        r2.gf += g2; r2.gd += g2 - g1;
+
+        if (g1 > g2) r1.pts += 3;
+        else if (g1 < g2) r2.pts += 3;
+        else { r1.pts += 1; r2.pts += 1; }
+      }
+      return result;
+    }
+
+    // Sort teams with full FIFA tiebreaker chain
+    const teamList = [...teamNames];
+    teamList.sort((a, b) => {
+      const ra = records.get(a)!;
+      const rb = records.get(b)!;
+
+      // 1. Points
+      const ptsDiff = pts(rb) - pts(ra);
+      if (ptsDiff !== 0) return ptsDiff;
+
+      // 2. Goal difference
+      const gdDiff = gd(rb) - gd(ra);
+      if (gdDiff !== 0) return gdDiff;
+
+      // 3. Goals scored
+      const gfDiff = rb.gf - ra.gf;
+      if (gfDiff !== 0) return gfDiff;
+
+      // 4-6. Head-to-head (between these two teams only)
+      const h = h2h([a, b]);
+      const ha = h.get(a)!;
+      const hb = h.get(b)!;
+
+      const h2hPts = hb.pts - ha.pts;
+      if (h2hPts !== 0) return h2hPts;
+
+      const h2hGd = hb.gd - ha.gd;
+      if (h2hGd !== 0) return h2hGd;
+
+      const h2hGf = hb.gf - ha.gf;
+      if (h2hGf !== 0) return h2hGf;
+
+      // Last resort: alphabetical (stable placeholder until disciplinary/ranking data available)
+      return a.localeCompare(b);
+    });
+
+    const teamsStats: TeamStats[] = teamList.map((name, i) => {
+      const r = records.get(name)!;
+      return {
+        name,
+        position: i + 1,
+        mp: r.mp,
+        w: r.w,
+        d: r.d,
+        l: r.l,
+        gf: r.gf,
+        ga: r.ga,
+        gd: gd(r),
+        pts: pts(r),
+      };
+    });
+
+    standings.push({
+      groupName,
+      positions: {
+        1: teamList[0],
+        2: teamList[1],
+        3: teamList[2],
+        4: teamList[3],
+      },
+      teams: teamsStats,
+    });
+  }
+
+  return standings.sort((a, b) => a.groupName.localeCompare(b.groupName));
+}
+
+/**
+ * Fetch current group standings from openfootball match data.
+ * Computes standings from actual match results rather than relying on
+ * a pre-sorted third-party API, ensuring accuracy.
  */
 export async function fetchStandingsFromApi(): Promise<{
   standings: GroupStanding[];
   source: string;
 }> {
-  // Fetch teams for name mapping
-  const teamsRes = await fetch(`${API_BASE}/get/teams`);
-  if (!teamsRes.ok) {
-    throw new Error(`Teams API returned ${teamsRes.status}`);
-  }
-  const teamsJson = await teamsRes.json() as { teams: ApiTeam[] };
-  const teamMap = new Map<string, string>();
-  for (const t of teamsJson.teams) {
-    teamMap.set(t.id, apiToOur(t.name_en));
+  const res = await fetch(OPENFOOTBALL_URL);
+  if (!res.ok) {
+    throw new Error(`openfootball fetch returned ${res.status}`);
   }
 
-  // Fetch groups/standings
-  const groupsRes = await fetch(`${API_BASE}/get/groups`);
-  if (!groupsRes.ok) {
-    throw new Error(`Groups API returned ${groupsRes.status}`);
-  }
-  const groupsJson = await groupsRes.json() as { groups: ApiGroup[] };
+  const json = await res.json() as { matches: Match[] };
+  const standings = computeStandings(json.matches);
 
-  const standings: GroupStanding[] = [];
-
-  for (const group of groupsJson.groups) {
-    const teams = group.teams;
-
-    // Check if any team has played matches (all zeroes = pre-tournament)
-    const hasResults = teams.some((t) => parseInt(t.mp || '0') > 0 || parseInt(t.pts || '0') > 0);
-
-    if (!hasResults) {
-      // Keep existing default standings for this group - don't overwrite
-      continue;
-    }
-
-    // Sort by: pts desc, goal diff desc, goals for desc
-    const sorted = [...teams].sort((a, b) => {
-      const ptsDiff = parseInt(b.pts || '0') - parseInt(a.pts || '0');
-      if (ptsDiff !== 0) return ptsDiff;
-      const gdDiff = parseInt(b.gd || '0') - parseInt(a.gd || '0');
-      if (gdDiff !== 0) return gdDiff;
-      return parseInt(b.gf || '0') - parseInt(a.gf || '0');
-    });
-
-    const positions: GroupStanding['positions'] = {
-      1: teamMap.get(sorted[0]?.team_id) || `Team ${sorted[0]?.team_id}`,
-      2: teamMap.get(sorted[1]?.team_id) || `Team ${sorted[1]?.team_id}`,
-      3: teamMap.get(sorted[2]?.team_id) || `Team ${sorted[2]?.team_id}`,
-      4: teamMap.get(sorted[3]?.team_id) || `Team ${sorted[3]?.team_id}`,
-    };
-
-    const teamsStats: TeamStats[] = sorted.map((t, i) => ({
-      name: teamMap.get(t.team_id) || `Team ${t.team_id}`,
-      position: i + 1,
-      mp: parseInt(t.mp || '0'),
-      w: parseInt(t.w || '0'),
-      d: parseInt(t.d || '0'),
-      l: parseInt(t.l || '0'),
-      gf: parseInt(t.gf || '0'),
-      ga: parseInt(t.ga || '0'),
-      gd: parseInt(t.gd || '0'),
-      pts: parseInt(t.pts || '0'),
-    }));
-
-    standings.push({ groupName: group.name, positions, teams: teamsStats });
-  }
-
-  return { standings, source: 'worldcup26.ir' };
+  return { standings, source: 'openfootball/worldcup.json' };
 }
