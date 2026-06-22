@@ -9,9 +9,8 @@ import {
 } from '@douyinfe/semi-ui';
 import { GroupStanding, Participant, ScoreBreakdown, Prediction } from './types';
 import { GroupStandingsViewer } from './components/GroupStandingsEditor';
-import { Leaderboard, ScoreDetailCard } from './components/Leaderboard';
+import { Leaderboard } from './components/Leaderboard';
 import { ParticipantManager } from './components/ParticipantManager';
-import { AllScoresView } from './components/AllScores';
 import { StatusIndicator } from './components/StatusIndicator';
 import { calculateLeaderboard } from './utils/scoring';
 import {
@@ -38,7 +37,6 @@ function App() {
   const [standings, setStandings] = useState<GroupStanding[]>([]);
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [pollStatus, setPollStatus] = useState<PollStatus | null>(null);
-  const [expandedParticipant, setExpandedParticipant] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -238,18 +236,6 @@ function App() {
         <Tabs type="button" size="large" style={{ marginBottom: 20 }}>
           <TabPane tab="🏆 Leaderboard 排行榜" itemKey="leaderboard">
             <Leaderboard leaderboard={leaderboard} />
-
-            {expandedParticipant && leaderboard.find(p => p.id === expandedParticipant) && (
-              <ScoreDetailCard participant={leaderboard.find(p => p.id === expandedParticipant)!} />
-            )}
-
-            {leaderboard.length > 0 && (
-              <div style={{ marginTop: 16 }}>
-                <Text type="secondary" style={{ display: 'block', marginBottom: 8 }}>
-                  Click a participant row to see their detailed score breakdown
-                </Text>
-              </div>
-            )}
           </TabPane>
 
           <TabPane tab="⚽ Group Standings 小组积分榜" itemKey="standings">
@@ -270,14 +256,6 @@ function App() {
             />
           </TabPane>
 
-          <TabPane tab="📊 Detailed Breakdown 详细积分" itemKey="breakdown">
-            <AllScoresView
-              participants={participants}
-              standings={standings}
-              expandedParticipant={expandedParticipant}
-              onExpand={setExpandedParticipant}
-            />
-          </TabPane>
         </Tabs>
       </Content>
 
