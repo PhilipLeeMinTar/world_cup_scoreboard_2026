@@ -1,5 +1,6 @@
 import { Group } from '../types';
 
+// Each group has 4 teams
 export const WORLD_CUP_2026_GROUPS: Group[] = [
   {
     name: 'A',
