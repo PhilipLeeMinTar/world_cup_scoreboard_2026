@@ -21,3 +21,23 @@ body {
 #root {
   min-height: 100vh;
 }
+
+/* Leaderboard row expand / collapse animations */
+@keyframes wc-expand {
+  from { opacity: 0; transform: scaleY(0.85) translateY(-6px); }
+  to   { opacity: 1; transform: scaleY(1)    translateY(0); }
+}
+@keyframes wc-collapse {
+  from { opacity: 1; transform: scaleY(1)    translateY(0); }
+  to   { opacity: 0; transform: scaleY(0.85) translateY(-6px); }
+}
+.wc-row-expand {
+  transform-origin: top;
+  animation: wc-expand 0.24s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.wc-row-collapse {
+  transform-origin: top;
+  animation: wc-collapse 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  overflow: hidden;
+  pointer-events: none;
+}

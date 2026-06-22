@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Table, Tag, Typography, Card } from '@douyinfe/semi-ui';
 import { Participant, ScoreBreakdown } from '../types';
 import { WORLD_CUP_2026_GROUPS } from '../data/groups';
@@ -127,7 +127,29 @@ function ScoreBreakdownTable({ score }: { score: ScoreBreakdown }) {
   );
 }
 
+const COLLAPSE_MS = 200;
+
 export function Leaderboard({ leaderboard }: LeaderboardProps) {
+  const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
+  const [collapsingKeys, setCollapsingKeys] = useState<Set<string>>(new Set());
+
+  const handleExpand = useCallback((expanded: boolean | undefined, record: (Participant & { score: ScoreBreakdown }) | undefined) => {
+    if (!record) return;
+    if (expanded) {
+      setExpandedKeys((prev) => [...prev, record.id]);
+    } else {
+      setCollapsingKeys((prev) => new Set([...prev, record.id]));
+      setTimeout(() => {
+        setExpandedKeys((prev) => prev.filter((k) => k !== record.id));
+        setCollapsingKeys((prev) => {
+          const next = new Set(prev);
+          next.delete(record.id);
+          return next;
+        });
+      }, COLLAPSE_MS);
+    }
+  }, []);
+
   const columns = [
     {
       title: 'Rank',
@@ -186,10 +208,18 @@ export function Leaderboard({ leaderboard }: LeaderboardProps) {
           pagination={false}
           size="small"
           empty={<Text>No participants yet</Text>}
-          expandedRowRender={(record: (Participant & { score: ScoreBreakdown }) | undefined) =>
-            record ? <ScoreBreakdownTable score={record.score} /> : null
-          }
+          expandedRowKeys={expandedKeys}
+          onExpand={handleExpand as any}
           expandRowByClick
+          expandedRowRender={(record: (Participant & { score: ScoreBreakdown }) | undefined) => {
+            if (!record) return null;
+            const isCollapsing = collapsingKeys.has(record.id);
+            return (
+              <div className={isCollapsing ? 'wc-row-collapse' : 'wc-row-expand'}>
+                <ScoreBreakdownTable score={record.score} />
+              </div>
+            );
+          }}
         />
       </ScrollableTable>
       {leaderboard.length > 0 && (
