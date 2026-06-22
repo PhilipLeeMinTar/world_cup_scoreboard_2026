@@ -3,7 +3,7 @@
  * Shared between frontend and backend.
  */
 
-// API name → Our name (used when processing API data → our database)
+// openfootball team name → our internal name
 const API_TO_OUR: Record<string, string> = {
   'Czech Republic': 'Czechia',
   'Turkey': 'Türkiye',
@@ -11,6 +11,8 @@ const API_TO_OUR: Record<string, string> = {
   'Cape Verde': 'Cabo Verde',
   'Democratic Republic of the Congo': 'Congo DR',
   'DR Congo': 'Congo DR',
+  'Bosnia & Herzegovina': 'Bosnia and Herzegovina',
+  'USA': 'United States',
 };
 
 /**

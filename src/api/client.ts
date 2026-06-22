@@ -90,122 +90,133 @@ async function backendFetchStatus(): Promise<PollStatus> {
 
 // ============ Direct API (GitHub Pages mode) ============
 
-const LIVE_API_BASE = 'https://worldcup26.ir';
+const OPENFOOTBALL_URL =
+  'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
 
-// CORS proxy for browser requests (worldcup26.ir doesn't set Access-Control-Allow-Origin
-// for all origins, so we need a proxy when running from GitHub Pages or localhost)
-const CORS_PROXY = 'https://corsproxy.io/?';
+interface OFMatch {
+  group?: string;
+  team1: string;
+  team2: string;
+  score?: { ft?: [number, number] };
+}
 
-async function directFetch(url: string): Promise<Response> {
-  // Try direct first (works if CORS is allowed)
-  try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
-    if (res.ok) return res;
-  } catch {
-    // Direct failed, try CORS proxy
+interface OFTeamRecord {
+  mp: number; w: number; d: number; l: number; gf: number; ga: number;
+}
+
+function computeStandingsFromMatches(matches: OFMatch[]): GroupStanding[] {
+  const groupMatches = new Map<string, OFMatch[]>();
+  for (const m of matches) {
+    if (!m.group || !m.group.startsWith('Group ') || !m.score?.ft) continue;
+    const g = m.group.replace('Group ', '');
+    if (!groupMatches.has(g)) groupMatches.set(g, []);
+    groupMatches.get(g)!.push(m);
   }
-  const res = await fetch(`${CORS_PROXY}${encodeURIComponent(url)}`, {
-    signal: AbortSignal.timeout(10000),
-  });
-  if (!res.ok) throw new Error(`API returned ${res.status}`);
-  return res;
-}
 
-interface LiveApiTeam {
-  id: string;
-  name_en: string;
-  groups: string;
-}
+  const standings: GroupStanding[] = [];
 
-interface LiveApiGroupTeam {
-  team_id: string;
-  mp: string;
-  w: string;
-  d: string;
-  l: string;
-  pts: string;
-  gf: string;
-  ga: string;
-  gd: string;
-}
+  for (const [groupName, gMatches] of groupMatches) {
+    const teamNames = new Set<string>();
+    for (const m of gMatches) {
+      teamNames.add(apiToOur(m.team1));
+      teamNames.add(apiToOur(m.team2));
+    }
 
-interface LiveApiGroup {
-  name: string;
-  teams: LiveApiGroupTeam[];
-}
+    const records = new Map<string, OFTeamRecord>();
+    for (const name of teamNames) {
+      records.set(name, { mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0 });
+    }
 
-// Cache for direct mode
-let cachedTeamMap: Map<string, string> | null = null;
+    for (const m of gMatches) {
+      const t1 = apiToOur(m.team1);
+      const t2 = apiToOur(m.team2);
+      const [g1, g2] = m.score!.ft!;
+      const r1 = records.get(t1)!;
+      const r2 = records.get(t2)!;
+      r1.mp++; r1.gf += g1; r1.ga += g2;
+      r2.mp++; r2.gf += g2; r2.ga += g1;
+      if (g1 > g2) { r1.w++; r2.l++; }
+      else if (g1 < g2) { r1.l++; r2.w++; }
+      else { r1.d++; r2.d++; }
+    }
 
-async function getTeamMap(): Promise<Map<string, string>> {
-  if (cachedTeamMap) return cachedTeamMap;
-  const res = await directFetch(`${LIVE_API_BASE}/get/teams`);
-  const data = await res.json() as { teams: LiveApiTeam[] };
-  const map = new Map<string, string>();
-  for (const t of data.teams) {
-    map.set(t.id, apiToOur(t.name_en));
+    const pts = (r: OFTeamRecord) => r.w * 3 + r.d;
+    const gd = (r: OFTeamRecord) => r.gf - r.ga;
+
+    function h2h(tied: string[]) {
+      const result = new Map<string, { pts: number; gd: number; gf: number }>();
+      for (const t of tied) result.set(t, { pts: 0, gd: 0, gf: 0 });
+      for (const m of gMatches) {
+        const t1 = apiToOur(m.team1);
+        const t2 = apiToOur(m.team2);
+        if (!tied.includes(t1) || !tied.includes(t2)) continue;
+        const [g1, g2] = m.score!.ft!;
+        const r1 = result.get(t1)!;
+        const r2 = result.get(t2)!;
+        r1.gf += g1; r1.gd += g1 - g2;
+        r2.gf += g2; r2.gd += g2 - g1;
+        if (g1 > g2) r1.pts += 3;
+        else if (g1 < g2) r2.pts += 3;
+        else { r1.pts += 1; r2.pts += 1; }
+      }
+      return result;
+    }
+
+    const teamList = [...teamNames];
+    teamList.sort((a, b) => {
+      const ra = records.get(a)!;
+      const rb = records.get(b)!;
+      const ptsDiff = pts(rb) - pts(ra);
+      if (ptsDiff !== 0) return ptsDiff;
+      const gdDiff = gd(rb) - gd(ra);
+      if (gdDiff !== 0) return gdDiff;
+      const gfDiff = rb.gf - ra.gf;
+      if (gfDiff !== 0) return gfDiff;
+      const h = h2h([a, b]);
+      const ha = h.get(a)!; const hb = h.get(b)!;
+      if (hb.pts !== ha.pts) return hb.pts - ha.pts;
+      if (hb.gd !== ha.gd) return hb.gd - ha.gd;
+      if (hb.gf !== ha.gf) return hb.gf - ha.gf;
+      return a.localeCompare(b);
+    });
+
+    const teamsStats: TeamStats[] = teamList.map((name, i) => {
+      const r = records.get(name)!;
+      return { name, position: i + 1, mp: r.mp, w: r.w, d: r.d, l: r.l, gf: r.gf, ga: r.ga, gd: gd(r), pts: pts(r) };
+    });
+
+    standings.push({
+      groupName,
+      positions: { 1: teamList[0], 2: teamList[1], 3: teamList[2], 4: teamList[3] },
+      teams: teamsStats,
+    });
   }
-  cachedTeamMap = map;
-  return map;
+
+  return standings.sort((a, b) => a.groupName.localeCompare(b.groupName));
 }
 
 async function directFetchStandings(): Promise<{
   standings: GroupStanding[];
   updatedAt: string;
 }> {
-  const teamMap = await getTeamMap();
-  const res = await directFetch(`${LIVE_API_BASE}/get/groups`);
-  const data = await res.json() as { groups: LiveApiGroup[] };
+  const res = await fetch(OPENFOOTBALL_URL, { signal: AbortSignal.timeout(15000) });
+  if (!res.ok) throw new Error(`openfootball fetch returned ${res.status}`);
+  const json = await res.json() as { matches: OFMatch[] };
+  const computed = computeStandingsFromMatches(json.matches);
 
-  const standings: GroupStanding[] = [];
-
-  for (const group of data.groups) {
-    const teams = group.teams;
-    const hasResults = teams.some((t) => parseInt(t.mp || '0') > 0 || parseInt(t.pts || '0') > 0);
-
-    if (!hasResults) {
-      // Pre-tournament: use default standings
-      const defaultStandings = getDefaultStandings();
-      const defaultGroup = defaultStandings.find((s) => s.groupName === group.name);
-      if (defaultGroup) standings.push(defaultGroup);
-      continue;
-    }
-
-    const sorted = [...teams].sort((a, b) => {
-      const ptsDiff = parseInt(b.pts || '0') - parseInt(a.pts || '0');
-      if (ptsDiff !== 0) return ptsDiff;
-      const gdDiff = parseInt(b.gd || '0') - parseInt(a.gd || '0');
-      if (gdDiff !== 0) return gdDiff;
-      return parseInt(b.gf || '0') - parseInt(a.gf || '0');
-    });
-
-    const positions: GroupStanding['positions'] = {
-      1: teamMap.get(sorted[0]?.team_id) || `Team ${sorted[0]?.team_id}`,
-      2: teamMap.get(sorted[1]?.team_id) || `Team ${sorted[1]?.team_id}`,
-      3: teamMap.get(sorted[2]?.team_id) || `Team ${sorted[2]?.team_id}`,
-      4: teamMap.get(sorted[3]?.team_id) || `Team ${sorted[3]?.team_id}`,
-    };
-
-    const teamsStats: TeamStats[] = sorted.map((t, i) => ({
-      name: teamMap.get(t.team_id) || `Team ${t.team_id}`,
-      position: i + 1,
-      mp: parseInt(t.mp || '0'),
-      w: parseInt(t.w || '0'),
-      d: parseInt(t.d || '0'),
-      l: parseInt(t.l || '0'),
-      gf: parseInt(t.gf || '0'),
-      ga: parseInt(t.ga || '0'),
-      gd: parseInt(t.gd || '0'),
-      pts: parseInt(t.pts || '0'),
-    }));
-
-    standings.push({ groupName: group.name, positions, teams: teamsStats });
+  // If no group stage results yet, fall back to defaults
+  if (computed.length === 0) {
+    return { standings: getDefaultStandings(), updatedAt: new Date().toISOString() };
   }
 
-  // Sort alphabetically by group name
-  standings.sort((a, b) => a.groupName.localeCompare(b.groupName));
+  // Merge: use computed standings where available, defaults for groups not yet started
+  const defaults = getDefaultStandings();
+  const merged = defaults.map((def) => {
+    const live = computed.find((c) => c.groupName === def.groupName);
+    return live ?? def;
+  });
 
-  return { standings, updatedAt: new Date().toISOString() };
+  return { standings: merged, updatedAt: new Date().toISOString() };
 }
 
 // LocalStorage helpers for direct mode participants
@@ -352,7 +363,7 @@ export async function fetchStatus(): Promise<PollStatus> {
   return {
     lastPollAt: directLastPollAt,
     lastPollStatus: directLastPollStatus,
-    apiSource: 'worldcup26.ir (direct)',
+    apiSource: 'openfootball/worldcup.json (direct)',
     pollIntervalMinutes: 120,
   };
 }
