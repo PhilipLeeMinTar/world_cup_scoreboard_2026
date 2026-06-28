@@ -90,7 +90,7 @@ function App() {
     init();
   }, []);
 
-  // Auto-refresh standings every 30 seconds
+  // Auto-refresh standings + knockout status every 30 seconds
   useEffect(() => {
     if (mode === 'detecting') return;
     const interval = setInterval(async () => {
@@ -101,6 +101,16 @@ function App() {
         ]);
         setStandings(standingsData.standings);
         setPollStatus(statusData);
+      } catch {
+        // Silently fail on background refresh
+      }
+      try {
+        const [koStatus, koPredictions] = await Promise.all([
+          apiGetKnockoutStatus(),
+          apiGetKnockoutPredictions(),
+        ]);
+        setKnockoutStatus(koStatus);
+        setKnockoutPredictions(koPredictions);
       } catch {
         // Silently fail on background refresh
       }

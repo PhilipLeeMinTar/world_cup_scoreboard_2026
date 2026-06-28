@@ -506,5 +506,6 @@ export async function refreshKnockoutResults(): Promise<void> {
   if (getMode() === 'backend') {
     return backendRefreshKnockoutResults();
   }
-  throw new Error('Refreshing knockout results requires backend mode');
+  // In direct mode, directFetchKnockoutStatus already uses cache: 'no-store',
+  // so the caller's onStatusChange() → getKnockoutStatus() will pull fresh data.
 }
