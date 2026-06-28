@@ -1,6 +1,7 @@
-import type { GroupStanding, Participant, Prediction, TeamStats } from '../types';
+import type { GroupStanding, Participant, Prediction, TeamStats, KnockoutStatus, KnockoutPrediction, KnockoutResults } from '../types';
 import { apiToOur } from '../utils/name-mapping';
 import { INITIAL_PARTICIPANTS } from '../data/participants';
+import { KNOCKOUT_PREDICTIONS } from '../data/knockoutPredictions';
 import { getDefaultStandings } from '../utils/scoring';
 
 // ============ Mode Detection ============
@@ -86,6 +87,45 @@ async function backendFetchStatus(): Promise<PollStatus> {
   const res = await fetch(`${API_BASE}/status`);
   if (!res.ok) throw new Error(`Failed to fetch status: ${res.status}`);
   return res.json();
+}
+
+async function backendGetKnockoutStatus(): Promise<KnockoutStatus> {
+  const res = await fetch(`${API_BASE}/knockout`);
+  if (!res.ok) throw new Error(`Failed to fetch knockout status: ${res.status}`);
+  return res.json();
+}
+
+async function backendGetKnockoutPredictions(): Promise<KnockoutPrediction[]> {
+  const res = await fetch(`${API_BASE}/knockout/predictions`);
+  if (!res.ok) throw new Error(`Failed to fetch knockout predictions: ${res.status}`);
+  return res.json();
+}
+
+async function backendSaveKnockoutPrediction(
+  participantId: string,
+  picks: Omit<KnockoutPrediction, 'participantId' | 'participantName' | 'updatedAt'>
+): Promise<void> {
+  const res = await fetch(`${API_BASE}/knockout/predictions/${participantId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(picks),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({})) as { error?: string };
+    throw new Error(err.error || `Failed to save knockout prediction: ${res.status}`);
+  }
+}
+
+
+async function backendToggleKnockoutLock(): Promise<{ locked: boolean }> {
+  const res = await fetch(`${API_BASE}/knockout/lock`, { method: 'POST' });
+  if (!res.ok) throw new Error(`Failed to toggle knockout lock: ${res.status}`);
+  return res.json();
+}
+
+async function backendRefreshKnockoutResults(): Promise<void> {
+  const res = await fetch(`${API_BASE}/knockout/refresh`, { method: 'POST' });
+  if (!res.ok) throw new Error(`Failed to refresh knockout results: ${res.status}`);
 }
 
 // ============ Direct API (GitHub Pages mode) ============
@@ -262,6 +302,52 @@ function saveDirectParticipants(participants: Participant[]) {
   } catch { /* ignore */ }
 }
 
+// ============ Direct mode — Knockout ============
+
+interface OFKnockoutMatch {
+  round: string;
+  team1: string;
+  team2: string;
+  score?: { ft?: [number, number]; et?: [number, number]; pen?: [number, number] };
+}
+
+function knockoutWinner(m: OFKnockoutMatch): string | null {
+  const s = m.score;
+  if (!s) return null;
+  if (s.pen) return s.pen[0] > s.pen[1] ? apiToOur(m.team1) : apiToOur(m.team2);
+  if (s.et) {
+    if (s.et[0] > s.et[1]) return apiToOur(m.team1);
+    if (s.et[1] > s.et[0]) return apiToOur(m.team2);
+  }
+  if (s.ft) {
+    if (s.ft[0] > s.ft[1]) return apiToOur(m.team1);
+    if (s.ft[1] > s.ft[0]) return apiToOur(m.team2);
+  }
+  return null;
+}
+
+async function directFetchKnockoutStatus(): Promise<KnockoutStatus> {
+  const res = await fetch(OPENFOOTBALL_URL, { signal: AbortSignal.timeout(15000) });
+  if (!res.ok) throw new Error(`openfootball fetch returned ${res.status}`);
+  const json = await res.json() as { matches: OFKnockoutMatch[] };
+
+  const KNOCKOUT_ROUNDS = new Set(['Round of 32', 'Round of 16', 'Quarter-final', 'Semi-final', 'Final']);
+  const km = (json.matches as OFKnockoutMatch[]).filter((m) => KNOCKOUT_ROUNDS.has(m.round));
+
+  const r32 = km.filter((m) => m.round === 'Round of 32');
+  const teams = r32.flatMap((m) => [apiToOur(m.team1), apiToOur(m.team2)]);
+
+  const results: KnockoutResults = {
+    r32Winners: r32.map(knockoutWinner).filter((w): w is string => w !== null),
+    qfTeams:    km.filter((m) => m.round === 'Round of 16').map(knockoutWinner).filter((w): w is string => w !== null),
+    sfTeams:    km.filter((m) => m.round === 'Quarter-final').map(knockoutWinner).filter((w): w is string => w !== null),
+    finalTeams: km.filter((m) => m.round === 'Semi-final').map(knockoutWinner).filter((w): w is string => w !== null),
+    champion:   knockoutWinner(km.find((m) => m.round === 'Final') ?? { round: 'Final', team1: '', team2: '' }) ?? '',
+  };
+
+  return { locked: false, teams, results };
+}
+
 // ============ Unified API ============
 
 export interface PollStatus {
@@ -366,4 +452,47 @@ export async function fetchStatus(): Promise<PollStatus> {
     apiSource: 'openfootball/worldcup.json (direct)',
     pollIntervalMinutes: 120,
   };
+}
+
+export async function getKnockoutStatus(): Promise<KnockoutStatus> {
+  if (getMode() === 'backend') {
+    return backendGetKnockoutStatus();
+  }
+  try {
+    return await directFetchKnockoutStatus();
+  } catch {
+    return { locked: false, teams: [], results: { r32Winners: [], qfTeams: [], sfTeams: [], finalTeams: [], champion: '' } };
+  }
+}
+
+export async function getKnockoutPredictions(): Promise<KnockoutPrediction[]> {
+  if (getMode() === 'backend') {
+    return backendGetKnockoutPredictions();
+  }
+  return KNOCKOUT_PREDICTIONS;
+}
+
+export async function saveKnockoutPrediction(
+  participantId: string,
+  picks: Omit<KnockoutPrediction, 'participantId' | 'participantName' | 'updatedAt'>
+): Promise<void> {
+  if (getMode() === 'backend') {
+    return backendSaveKnockoutPrediction(participantId, picks);
+  }
+  throw new Error('Knockout predictions require backend mode');
+}
+
+
+export async function toggleKnockoutLock(): Promise<{ locked: boolean }> {
+  if (getMode() === 'backend') {
+    return backendToggleKnockoutLock();
+  }
+  throw new Error('Toggling knockout lock requires backend mode');
+}
+
+export async function refreshKnockoutResults(): Promise<void> {
+  if (getMode() === 'backend') {
+    return backendRefreshKnockoutResults();
+  }
+  throw new Error('Refreshing knockout results requires backend mode');
 }

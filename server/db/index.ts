@@ -4,7 +4,8 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DB_PATH = path.join(__dirname, 'data', 'scoreboard.db');
+// DB_PATH env var lets Railway (or any deployment) point to a persistent volume
+const DB_PATH = process.env.DB_PATH ?? path.join(__dirname, 'data', 'scoreboard.db');
 
 let db: Database.Database;
 

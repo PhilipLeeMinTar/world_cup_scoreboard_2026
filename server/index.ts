@@ -3,10 +3,13 @@ import { cors } from 'hono/cors';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { getDb, closeDb } from './db/index.js';
 import { initSchema } from './db/schema.js';
+import { seed } from './db/seed.js';
 import { startPolling, stopPolling } from './services/poll.js';
+import { startKnockoutPolling, stopKnockoutPolling } from './services/knockout-poll.js';
 import standingsRoutes from './routes/standings.js';
 import participantsRoutes from './routes/participants.js';
 import statusRoutes from './routes/status.js';
+import knockoutRoutes from './routes/knockout.js';
 
 const app = new Hono();
 const PORT = parseInt(process.env.PORT || '3001', 10);
@@ -18,6 +21,7 @@ app.use('/api/*', cors());
 app.route('/api/standings', standingsRoutes);
 app.route('/api/participants', participantsRoutes);
 app.route('/api/status', statusRoutes);
+app.route('/api/knockout', knockoutRoutes);
 
 // Health check
 app.get('/api/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }));
@@ -39,8 +43,9 @@ async function start() {
     console.log('No standings found. Run `npm run seed` to populate the database.');
   }
 
-  // Start polling service
+  // Start polling services
   startPolling();
+  startKnockoutPolling();
 
   // Start HTTP server
   const { serve } = await import('@hono/node-server');
@@ -53,12 +58,14 @@ async function start() {
   process.on('SIGINT', () => {
     console.log('\nShutting down...');
     stopPolling();
+    stopKnockoutPolling();
     closeDb();
     process.exit(0);
   });
 
   process.on('SIGTERM', () => {
     stopPolling();
+    stopKnockoutPolling();
     closeDb();
     process.exit(0);
   });

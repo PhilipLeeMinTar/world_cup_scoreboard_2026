@@ -49,6 +49,54 @@ export interface ScoreBreakdown {
   details: GroupScoreDetail[];
 }
 
+export interface KnockoutPrediction {
+  participantId: string;
+  participantName: string;
+  r32Picks: string[];
+  qfPicks: string[];
+  sfPicks: string[];
+  finalPicks: string[];
+  championPick: string;
+  updatedAt: string;
+}
+
+export interface KnockoutResults {
+  r32Winners: string[];
+  qfTeams: string[];
+  sfTeams: string[];
+  finalTeams: string[];
+  champion: string;
+}
+
+export interface KnockoutStatus {
+  locked: boolean;
+  teams: string[];
+  results: KnockoutResults;
+  lastUpdated?: string;
+}
+
+export interface KnockoutRoundScore {
+  correct: number;
+  possible: number;
+  points: number;
+}
+
+export interface KnockoutScoreBreakdown {
+  r32: KnockoutRoundScore;
+  qf: KnockoutRoundScore;
+  sf: KnockoutRoundScore;
+  final: KnockoutRoundScore;
+  champion: KnockoutRoundScore;
+  total: number;
+}
+
+export interface RankedKnockoutEntry {
+  participantId: string;
+  participantName: string;
+  score: KnockoutScoreBreakdown;
+  rank: number;
+}
+
 export interface GroupScoreDetail {
   groupName: string;
   predictedChampion: string;

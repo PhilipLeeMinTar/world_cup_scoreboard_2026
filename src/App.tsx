@@ -7,11 +7,15 @@ import {
   Notification,
   Spin,
 } from '@douyinfe/semi-ui';
-import { GroupStanding, Participant, ScoreBreakdown, Prediction } from './types';
+import { GroupStanding, Participant, ScoreBreakdown, Prediction, KnockoutStatus, KnockoutPrediction } from './types';
 import { GroupStandingsViewer } from './components/GroupStandingsEditor';
 import { Leaderboard } from './components/Leaderboard';
 import { ParticipantManager } from './components/ParticipantManager';
 import { StatusIndicator } from './components/StatusIndicator';
+import { KnockoutLeaderboard } from './components/KnockoutLeaderboard';
+import { KnockoutPredictionManager } from './components/KnockoutPredictionManager';
+import { KnockoutAdmin } from './components/KnockoutAdmin';
+import { KnockoutBracket } from './components/KnockoutBracket';
 import { calculateLeaderboard } from './utils/scoring';
 import {
   detectMode,
@@ -24,6 +28,8 @@ import {
   updateParticipant as apiUpdateParticipant,
   deleteParticipant as apiDeleteParticipant,
   fetchStatus as apiFetchStatus,
+  getKnockoutStatus as apiGetKnockoutStatus,
+  getKnockoutPredictions as apiGetKnockoutPredictions,
   PollStatus,
 } from './api/client';
 
@@ -39,6 +45,8 @@ function App() {
   const [pollStatus, setPollStatus] = useState<PollStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [knockoutStatus, setKnockoutStatus] = useState<KnockoutStatus | null>(null);
+  const [knockoutPredictions, setKnockoutPredictions] = useState<KnockoutPrediction[]>([]);
 
   // Detect mode and load initial data
   useEffect(() => {
@@ -65,6 +73,18 @@ function App() {
         setParticipants(INITIAL_PARTICIPANTS);
       } finally {
         setLoading(false);
+      }
+
+      // Load knockout data independently so a failure here doesn't break the group stage
+      try {
+        const [koStatus, koPredictions] = await Promise.all([
+          apiGetKnockoutStatus(),
+          apiGetKnockoutPredictions(),
+        ]);
+        setKnockoutStatus(koStatus);
+        setKnockoutPredictions(koPredictions);
+      } catch (err) {
+        console.warn('Failed to load knockout data:', err);
       }
     }
     init();
@@ -124,6 +144,19 @@ function App() {
   const handleDeleteParticipant = useCallback(async (id: string) => {
     await apiDeleteParticipant(id);
     setParticipants((prev) => prev.filter((p) => p.id !== id));
+  }, []);
+
+  const reloadKnockoutStatus = useCallback(async () => {
+    try {
+      const [koStatus, koPredictions] = await Promise.all([
+        apiGetKnockoutStatus(),
+        apiGetKnockoutPredictions(),
+      ]);
+      setKnockoutStatus(koStatus);
+      setKnockoutPredictions(koPredictions);
+    } catch (err) {
+      console.warn('Failed to reload knockout data:', err);
+    }
   }, []);
 
   const leaderboard = calculateLeaderboard(participants, standings);
@@ -245,6 +278,20 @@ function App() {
               refreshing={refreshing}
               updatedAt={pollStatus?.lastPollAt || ''}
             />
+          </TabPane>
+
+          <TabPane tab="🏟️ Knockout 淘汰赛" itemKey="knockout">
+            <KnockoutLeaderboard predictions={knockoutPredictions} status={knockoutStatus} />
+            <KnockoutPredictionManager
+              participants={participants}
+              status={knockoutStatus}
+              onStatusChange={reloadKnockoutStatus}
+            />
+            <KnockoutAdmin status={knockoutStatus} onStatusChange={reloadKnockoutStatus} />
+          </TabPane>
+
+          <TabPane tab="🗺️ Bracket 对阵图" itemKey="bracket">
+            <KnockoutBracket predictions={knockoutPredictions} status={knockoutStatus} />
           </TabPane>
 
           <TabPane tab={`👥 Participants 参与者 (${participants.length})`} itemKey="participants">

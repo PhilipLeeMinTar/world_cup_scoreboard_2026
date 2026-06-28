@@ -71,8 +71,20 @@ export function seed() {
     console.log(`Seeded ${getDefaultStandings().length} default standings`);
   }
 
+  // Seed knockout_results default row
+  const koResultsCount = db.prepare('SELECT COUNT(*) as count FROM knockout_results').get() as { count: number };
+  if (koResultsCount.count === 0) {
+    db.prepare(`INSERT INTO knockout_results (id, r32_winners_json, qf_teams_json, sf_teams_json, final_teams_json, champion, updated_at)
+      VALUES (1, '[]', '[]', '[]', '[]', '', ?)`).run(new Date().toISOString());
+    console.log('Seeded knockout_results default row');
+  }
+
   console.log('Seed complete!');
 }
 
-// Run seed if called directly
-seed();
+// Only auto-run when executed directly, not when imported by the server
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+if (process.argv[1] === __filename) {
+  seed();
+}
