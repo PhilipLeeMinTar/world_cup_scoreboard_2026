@@ -532,6 +532,25 @@ export function KnockoutBracket({ predictions, status }: Props) {
         </div>
       </div>
 
+      {/* Tip */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        marginBottom: 20,
+        padding: '10px 14px',
+        background: 'rgba(251,191,36,0.08)',
+        border: '1px solid rgba(251,191,36,0.2)',
+        borderRadius: 8,
+        fontSize: 12,
+        color: 'rgba(251,191,36,0.85)',
+      }}>
+        <span style={{ fontSize: 15, flexShrink: 0 }}>💡</span>
+        <span>
+          Use the <strong style={{ color: '#fbbf24' }}>View</strong> dropdown to switch between the live bracket and each participant's predictions — see how everyone's picks hold up as the tournament progresses.
+        </span>
+      </div>
+
       {/* No data state */}
       {!hasTeams && (
         <div style={{ color: T.textSecondary, textAlign: 'center', padding: '40px 0' }}>
