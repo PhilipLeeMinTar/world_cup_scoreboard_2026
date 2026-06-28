@@ -25,4 +25,14 @@ export const KNOCKOUT_PREDICTIONS: KnockoutPrediction[] = [
     championPick: "Spain",
     updatedAt: "2026-06-28T15:16:03.166Z",
   },
+  {
+    participantId: "p_litielong",
+    participantName: "李铁龙",
+    r32Picks: ["South Africa", "Germany", "Morocco", "Japan", "France", "Ivory Coast", "Mexico", "England", "USA", "Belgium", "Portugal", "Spain", "Switzerland", "Argentina", "Colombia", "Australia"],
+    qfPicks: ["Germany", "South Africa", "Japan", "Mexico", "Portugal", "USA", "Argentina", "Switzerland"],
+    sfPicks: ["Germany", "Portugal", "Japan", "Argentina"],
+    finalPicks: ["Germany", "Japan"],
+    championPick: "Japan",
+    updatedAt: "2026-06-28T16:41:03.411Z",
+  },
 ];
