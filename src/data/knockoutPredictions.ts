@@ -6,26 +6,6 @@ import type { KnockoutPrediction } from '../types';
  */
 export const KNOCKOUT_PREDICTIONS: KnockoutPrediction[] = [
   {
-    participantId: "p_gg",
-    participantName: "GG",
-    r32Picks: ["South Africa", "Germany", "Netherlands", "Brazil", "France", "Ivory Coast", "Mexico", "Congo DR", "Belgium", "Croatia", "Switzerland", "Cabo Verde", "Australia", "Argentina", "Colombia", "Ghana"],
-    qfPicks: ["Germany", "Brazil", "France", "Mexico", "Belgium", "Switzerland", "Argentina", "Colombia"],
-    sfPicks: ["Brazil", "France", "Argentina", "Colombia"],
-    finalPicks: ["France", "Argentina"],
-    championPick: "Argentina",
-    updatedAt: "2026-06-28T15:16:03.158Z",
-  },
-  {
-    participantId: "p_jackpotron",
-    participantName: "Jackpot Ron",
-    r32Picks: ["Canada", "Paraguay", "Morocco", "Japan", "Sweden", "Norway", "Ecuador", "USA", "Senegal", "Spain", "Algeria", "Colombia", "Egypt", "Ghana", "Portugal", "Austria"],
-    qfPicks: ["Canada", "Morocco", "Sweden", "Ecuador", "Senegal", "Spain", "Colombia", "Portugal"],
-    sfPicks: ["Morocco", "Sweden", "Spain", "Colombia"],
-    finalPicks: ["Sweden", "Spain"],
-    championPick: "Spain",
-    updatedAt: "2026-06-28T15:16:03.166Z",
-  },
-  {
     participantId: "p_litielong",
     participantName: "李铁龙",
     r32Picks: ["South Africa", "Germany", "Morocco", "Japan", "France", "Ivory Coast", "Mexico", "England", "USA", "Belgium", "Portugal", "Spain", "Switzerland", "Argentina", "Colombia", "Australia"],
