@@ -117,6 +117,11 @@ async function backendSaveKnockoutPrediction(
 }
 
 
+async function backendDeleteKnockoutPrediction(participantId: string): Promise<void> {
+  const res = await fetch(`${API_BASE}/knockout/predictions/${participantId}`, { method: 'DELETE' });
+  if (!res.ok) throw new Error(`Failed to delete knockout prediction: ${res.status}`);
+}
+
 async function backendToggleKnockoutLock(): Promise<{ locked: boolean }> {
   const res = await fetch(`${API_BASE}/knockout/lock`, { method: 'POST' });
   if (!res.ok) throw new Error(`Failed to toggle knockout lock: ${res.status}`);
@@ -239,7 +244,7 @@ async function directFetchStandings(): Promise<{
   standings: GroupStanding[];
   updatedAt: string;
 }> {
-  const res = await fetch(OPENFOOTBALL_URL, { signal: AbortSignal.timeout(15000) });
+  const res = await fetch(OPENFOOTBALL_URL, { signal: AbortSignal.timeout(15000), cache: 'no-store' });
   if (!res.ok) throw new Error(`openfootball fetch returned ${res.status}`);
   const json = await res.json() as { matches: OFMatch[] };
   const computed = computeStandingsFromMatches(json.matches);
@@ -327,7 +332,7 @@ function knockoutWinner(m: OFKnockoutMatch): string | null {
 }
 
 async function directFetchKnockoutStatus(): Promise<KnockoutStatus> {
-  const res = await fetch(OPENFOOTBALL_URL, { signal: AbortSignal.timeout(15000) });
+  const res = await fetch(OPENFOOTBALL_URL, { signal: AbortSignal.timeout(15000), cache: 'no-store' });
   if (!res.ok) throw new Error(`openfootball fetch returned ${res.status}`);
   const json = await res.json() as { matches: OFKnockoutMatch[] };
 
@@ -482,6 +487,13 @@ export async function saveKnockoutPrediction(
   throw new Error('Knockout predictions require backend mode');
 }
 
+
+export async function deleteKnockoutPrediction(participantId: string): Promise<void> {
+  if (getMode() === 'backend') {
+    return backendDeleteKnockoutPrediction(participantId);
+  }
+  throw new Error('Deleting knockout predictions requires backend mode');
+}
 
 export async function toggleKnockoutLock(): Promise<{ locked: boolean }> {
   if (getMode() === 'backend') {

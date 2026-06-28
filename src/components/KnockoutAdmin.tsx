@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Card, Button, Tag, Typography, Notification } from '@douyinfe/semi-ui';
-import type { KnockoutStatus } from '../types';
-import { toggleKnockoutLock, refreshKnockoutResults } from '../api/client';
+import { Card, Button, Tag, Typography, Notification, Popconfirm } from '@douyinfe/semi-ui';
+import type { KnockoutStatus, KnockoutPrediction } from '../types';
+import { toggleKnockoutLock, refreshKnockoutResults, deleteKnockoutPrediction } from '../api/client';
 
 const { Text } = Typography;
 
 interface Props {
   status: KnockoutStatus | null;
+  predictions: KnockoutPrediction[];
   onStatusChange: () => void;
 }
 
@@ -15,9 +16,10 @@ function formatTime(iso: string): string {
   return new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-export function KnockoutAdmin({ status, onStatusChange }: Props) {
+export function KnockoutAdmin({ status, predictions, onStatusChange }: Props) {
   const [togglingLock, setTogglingLock] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   const locked = status?.locked ?? false;
   const results = status?.results;
@@ -51,6 +53,19 @@ export function KnockoutAdmin({ status, onStatusChange }: Props) {
       Notification.error({ title: 'Refresh failed', content: err instanceof Error ? err.message : 'API error' });
     } finally {
       setRefreshing(false);
+    }
+  }
+
+  async function handleDeletePrediction(participantId: string, participantName: string) {
+    setDeleting(participantId);
+    try {
+      await deleteKnockoutPrediction(participantId);
+      onStatusChange();
+      Notification.success({ title: 'Deleted', content: `Removed knockout predictions for ${participantName}` });
+    } catch (err) {
+      Notification.error({ title: 'Delete failed', content: err instanceof Error ? err.message : 'API error' });
+    } finally {
+      setDeleting(null);
     }
   }
 
@@ -90,7 +105,7 @@ export function KnockoutAdmin({ status, onStatusChange }: Props) {
       </div>
 
       {/* Lock / Unlock */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: predictions.length > 0 ? 20 : 0 }}>
         <Text strong>Predictions:</Text>
         {locked
           ? <Tag color="red" size="large">Locked 🔒</Tag>
@@ -100,6 +115,54 @@ export function KnockoutAdmin({ status, onStatusChange }: Props) {
           {locked ? 'Unlock Predictions' : 'Lock Predictions'}
         </Button>
       </div>
+
+      {/* Submitted predictions list with delete */}
+      {predictions.length > 0 && (
+        <div>
+          <Text strong style={{ display: 'block', marginBottom: 10 }}>
+            Submitted Predictions ({predictions.length})
+          </Text>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {predictions.map((p) => (
+              <div
+                key={p.participantId}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  padding: '6px 10px',
+                  background: 'rgba(0,0,0,0.04)',
+                  border: '1px solid rgba(0,0,0,0.1)',
+                  borderRadius: 6,
+                }}
+              >
+                <Text style={{ fontSize: 13 }}>{p.participantName}</Text>
+                <Text type="tertiary" style={{ fontSize: 11 }}>
+                  {p.updatedAt ? formatTime(p.updatedAt) : ''}
+                </Text>
+                <Popconfirm
+                  title="Delete predictions?"
+                  content={`Remove all knockout picks for ${p.participantName}?`}
+                  onConfirm={() => handleDeletePrediction(p.participantId, p.participantName)}
+                  okType="danger"
+                  okText="Delete"
+                  cancelText="Cancel"
+                >
+                  <Button
+                    size="small"
+                    type="danger"
+                    theme="light"
+                    loading={deleting === p.participantId}
+                    style={{ padding: '0 8px', height: 24, fontSize: 11 }}
+                  >
+                    Delete
+                  </Button>
+                </Popconfirm>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </Card>
   );
 }

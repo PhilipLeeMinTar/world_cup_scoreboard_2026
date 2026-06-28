@@ -111,10 +111,8 @@ function App() {
   const handleRefresh = useCallback(async () => {
     setRefreshing(true);
     try {
-      const [standingsData, statusData] = await Promise.all([
-        apiRefreshStandings(),
-        apiFetchStatus(),
-      ]);
+      const standingsData = await apiRefreshStandings();
+      const statusData = await apiFetchStatus();
       setStandings(standingsData.standings);
       setPollStatus(statusData);
       if (standingsData.success) {
@@ -287,7 +285,7 @@ function App() {
               status={knockoutStatus}
               onStatusChange={reloadKnockoutStatus}
             />
-            <KnockoutAdmin status={knockoutStatus} onStatusChange={reloadKnockoutStatus} />
+            <KnockoutAdmin status={knockoutStatus} predictions={knockoutPredictions} onStatusChange={reloadKnockoutStatus} />
           </TabPane>
 
           <TabPane tab="🗺️ Bracket 对阵图" itemKey="bracket">

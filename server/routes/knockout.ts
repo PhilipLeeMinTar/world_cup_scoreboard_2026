@@ -113,6 +113,14 @@ knockout.put('/predictions/:participantId', async (c) => {
   return c.json({ success: true });
 });
 
+// DELETE /api/knockout/predictions/:participantId — remove a participant's predictions
+knockout.delete('/predictions/:participantId', (c) => {
+  const db = getDb();
+  const participantId = c.req.param('participantId');
+  db.prepare('DELETE FROM knockout_predictions WHERE participant_id = ?').run(participantId);
+  return c.json({ success: true });
+});
+
 // POST /api/knockout/refresh — manually trigger a live data poll
 knockout.post('/refresh', async (c) => {
   const result = await pollKnockoutResults();
