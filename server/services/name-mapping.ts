@@ -13,6 +13,8 @@ const API_TO_OUR: Record<string, string> = {
   'Cape Verde': 'Cabo Verde',
   'Democratic Republic of the Congo': 'Congo DR',
   'DR Congo': 'Congo DR',
+  'USA': 'United States',
+  'Bosnia & Herzegovina': 'Bosnia and Herzegovina',
 };
 
 // Our name → API name (used when querying the API with our team names)
@@ -22,6 +24,8 @@ const OUR_TO_API: Record<string, string> = {
   'IR Iran': 'Iran',
   'Cabo Verde': 'Cape Verde',
   'Congo DR': 'DR Congo',
+  'United States': 'USA',
+  'Bosnia and Herzegovina': 'Bosnia & Herzegovina',
 };
 
 /**

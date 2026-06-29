@@ -10,8 +10,8 @@ const TEAM_INFO: Record<string, TeamInfo> = {
   'South Africa':            { flag: '🇿🇦', zh: '南非' },
   // Group B
   'Canada':                  { flag: '🇨🇦', zh: '加拿大' },
-  'USA':                     { flag: '🇺🇸', zh: '美国' },
-  'Bosnia & Herzegovina':    { flag: '🇧🇦', zh: '波黑' },
+  'United States':           { flag: '🇺🇸', zh: '美国' },
+  'Bosnia and Herzegovina':  { flag: '🇧🇦', zh: '波黑' },
   'Switzerland':             { flag: '🇨🇭', zh: '瑞士' },
   // Group C
   'Brazil':                  { flag: '🇧🇷', zh: '巴西' },

@@ -8,7 +8,7 @@ export const KNOCKOUT_PREDICTIONS: KnockoutPrediction[] = [
   {
     participantId: "p_litielong",
     participantName: "李铁龙",
-    r32Picks: ["Canada", "Germany", "Morocco", "Brazil", "France", "Norway", "Mexico", "England", "USA", "Belgium", "Portugal", "Spain", "Switzerland", "Argentina", "Colombia", "Egypt"],
+    r32Picks: ["Canada", "Germany", "Morocco", "Brazil", "France", "Norway", "Mexico", "England", "United States", "Belgium", "Portugal", "Spain", "Switzerland", "Argentina", "Colombia", "Egypt"],
     qfPicks: ["France", "Morocco", "Brazil", "England", "Spain", "Belgium", "Argentina", "Colombia"],
     sfPicks: ["France", "Spain", "Brazil", "Argentina"],
     finalPicks: ["France", "Argentina"],
