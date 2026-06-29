@@ -22,7 +22,6 @@ import {
   getMode,
   AppMode,
   fetchStandings as apiFetchStandings,
-  refreshStandings as apiRefreshStandings,
   fetchParticipants as apiFetchParticipants,
   addParticipant as apiAddParticipant,
   updateParticipant as apiUpdateParticipant,
@@ -90,20 +89,10 @@ function App() {
     init();
   }, []);
 
-  // Auto-refresh standings + knockout status every 30 seconds
+  // Auto-refresh knockout status every 30 seconds (group stage is finalised)
   useEffect(() => {
     if (mode === 'detecting') return;
     const interval = setInterval(async () => {
-      try {
-        const [standingsData, statusData] = await Promise.all([
-          apiFetchStandings(),
-          apiFetchStatus(),
-        ]);
-        setStandings(standingsData.standings);
-        setPollStatus(statusData);
-      } catch {
-        // Silently fail on background refresh
-      }
       try {
         const [koStatus, koPredictions] = await Promise.all([
           apiGetKnockoutStatus(),
@@ -121,15 +110,13 @@ function App() {
   const handleRefresh = useCallback(async () => {
     setRefreshing(true);
     try {
-      const standingsData = await apiRefreshStandings();
-      const statusData = await apiFetchStatus();
-      setStandings(standingsData.standings);
-      setPollStatus(statusData);
-      if (standingsData.success) {
-        Notification.success({ title: 'Scores updated', content: 'Latest standings fetched from live API' });
-      } else {
-        Notification.warning({ title: 'Refresh issue', content: standingsData.error || 'Could not fetch live data' });
-      }
+      const [koStatus, koPredictions] = await Promise.all([
+        apiGetKnockoutStatus(),
+        apiGetKnockoutPredictions(),
+      ]);
+      setKnockoutStatus(koStatus);
+      setKnockoutPredictions(koPredictions);
+      Notification.success({ title: 'Knockout updated', content: 'Latest knockout results fetched from live API' });
     } catch (err) {
       Notification.error({ title: 'Refresh failed', content: 'Could not reach the live scores API' });
     } finally {
@@ -264,7 +251,7 @@ function App() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <StatusIndicator
-              status={pollStatus}
+              status={knockoutStatus?.lastUpdated ? { lastPollAt: knockoutStatus.lastUpdated, lastPollStatus: 'success', apiSource: 'knockout', pollIntervalMinutes: 0.5 } : pollStatus}
               loading={refreshing}
               onRefresh={handleRefresh}
               mode={mode === 'detecting' ? 'direct' : mode}
@@ -275,20 +262,15 @@ function App() {
 
       <Content style={{ padding: '16px', maxWidth: 1400, margin: '0 auto', width: '100%' }}>
         <Tabs type="button" size="large" style={{ marginBottom: 20 }}>
-          <TabPane tab="🏆 Leaderboard 排行榜" itemKey="leaderboard">
+          <TabPane tab={<span>🏆 Leaderboard 排行榜 <span style={{ fontSize: 10, background: 'rgba(120,120,120,0.15)', color: 'var(--semi-color-tertiary)', padding: '1px 6px', borderRadius: 8, marginLeft: 2, fontWeight: 500 }}>Part 1</span></span>} itemKey="leaderboard">
             <Leaderboard leaderboard={leaderboard} />
           </TabPane>
 
-          <TabPane tab="⚽ Group Standings 小组积分榜" itemKey="standings">
-            <GroupStandingsViewer
-              standings={standings}
-              onRefresh={handleRefresh}
-              refreshing={refreshing}
-              updatedAt={pollStatus?.lastPollAt || ''}
-            />
+          <TabPane tab={<span>⚽ Group Standings 小组积分榜 <span style={{ fontSize: 10, background: 'rgba(120,120,120,0.15)', color: 'var(--semi-color-tertiary)', padding: '1px 6px', borderRadius: 8, marginLeft: 2, fontWeight: 500 }}>Part 1</span></span>} itemKey="standings">
+            <GroupStandingsViewer standings={standings} />
           </TabPane>
 
-          <TabPane tab="🏟️ Knockout 淘汰赛" itemKey="knockout">
+          <TabPane tab={<span>🏟️ Knockout 淘汰赛 <span style={{ fontSize: 10, background: 'rgba(233,69,96,0.15)', color: '#e94560', padding: '1px 6px', borderRadius: 8, marginLeft: 2, fontWeight: 600 }}>Part 2 · Live</span></span>} itemKey="knockout">
             <KnockoutLeaderboard predictions={knockoutPredictions} status={knockoutStatus} />
             <KnockoutPredictionManager
               participants={participants}
@@ -298,7 +280,7 @@ function App() {
             <KnockoutAdmin status={knockoutStatus} predictions={knockoutPredictions} onStatusChange={reloadKnockoutStatus} />
           </TabPane>
 
-          <TabPane tab="🗺️ Bracket 对阵图" itemKey="bracket">
+          <TabPane tab={<span>🗺️ Bracket 对阵图 <span style={{ fontSize: 10, background: 'rgba(233,69,96,0.15)', color: '#e94560', padding: '1px 6px', borderRadius: 8, marginLeft: 2, fontWeight: 600 }}>Part 2 · Live</span></span>} itemKey="bracket">
             <KnockoutBracket predictions={knockoutPredictions} status={knockoutStatus} />
           </TabPane>
 

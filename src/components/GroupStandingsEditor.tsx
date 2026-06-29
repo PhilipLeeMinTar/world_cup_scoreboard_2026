@@ -3,9 +3,7 @@ import {
   Table,
   Typography,
   Card,
-  Button,
 } from '@douyinfe/semi-ui';
-import { IconRefresh } from '@douyinfe/semi-icons';
 import { GroupStanding, TeamStats } from '../types';
 import { WORLD_CUP_2026_GROUPS } from '../data/groups';
 import { teamZh } from '../data/translations';
@@ -15,34 +13,16 @@ const { Text } = Typography;
 
 interface GroupStandingsViewerProps {
   standings: GroupStanding[];
-  onRefresh: () => void;
-  refreshing: boolean;
-  updatedAt: string;
 }
 
-export function GroupStandingsViewer({ standings, onRefresh, refreshing, updatedAt }: GroupStandingsViewerProps) {
-  const formattedTime = updatedAt
-    ? new Date(updatedAt).toLocaleString()
-    : 'Not yet synced';
-
+export function GroupStandingsViewer({ standings }: GroupStandingsViewerProps) {
   return (
     <Card
-      title="⚽ Group Standings 小组积分榜 — Live"
+      title="⚽ Group Standings 小组积分榜 — Final"
       style={{ marginBottom: 20 }}
-      headerExtraContent={
-        <Button
-          icon={<IconRefresh />}
-          onClick={onRefresh}
-          loading={refreshing}
-          theme="solid"
-        >
-          Refresh Scores
-        </Button>
-      }
     >
       <Text type="secondary" style={{ marginBottom: 12, display: 'block' }}>
-        Standings are automatically synced from live match data every 2 hours.
-        Click "Refresh Scores" for an immediate update.
+        Group stage is complete. These are the final standings.
       </Text>
 
       <div style={{
@@ -54,10 +34,6 @@ export function GroupStandingsViewer({ standings, onRefresh, refreshing, updated
           <GroupTable key={standing.groupName} standing={standing} />
         ))}
       </div>
-
-      <Text type="tertiary" style={{ marginTop: 12, display: 'block', fontSize: 12 }}>
-        Last synced: {formattedTime}
-      </Text>
     </Card>
   );
 }
