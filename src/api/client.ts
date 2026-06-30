@@ -313,13 +313,13 @@ interface OFKnockoutMatch {
   round: string;
   team1: string;
   team2: string;
-  score?: { ft?: [number, number]; et?: [number, number]; pen?: [number, number] };
+  score?: { ft?: [number, number]; et?: [number, number]; p?: [number, number] }; // openfootball uses 'p' for penalties
 }
 
 function knockoutWinner(m: OFKnockoutMatch): string | null {
   const s = m.score;
   if (!s) return null;
-  if (s.pen) return s.pen[0] > s.pen[1] ? apiToOur(m.team1) : apiToOur(m.team2);
+  if (s.p) return s.p[0] > s.p[1] ? apiToOur(m.team1) : apiToOur(m.team2);
   if (s.et) {
     if (s.et[0] > s.et[1]) return apiToOur(m.team1);
     if (s.et[1] > s.et[0]) return apiToOur(m.team2);

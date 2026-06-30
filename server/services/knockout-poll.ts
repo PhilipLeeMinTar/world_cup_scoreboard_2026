@@ -7,7 +7,7 @@ const OPENFOOTBALL_URL =
 interface MatchScore {
   ft?: [number, number];
   et?: [number, number];
-  pen?: [number, number];
+  p?: [number, number]; // openfootball uses 'p' for penalty shootout
 }
 
 interface KnockoutMatch {
@@ -21,8 +21,8 @@ function getWinner(match: KnockoutMatch): string | null {
   const s = match.score;
   if (!s) return null;
   // Penalty shootout takes priority for overall winner
-  if (s.pen) {
-    return s.pen[0] > s.pen[1] ? apiToOur(match.team1) : apiToOur(match.team2);
+  if (s.p) {
+    return s.p[0] > s.p[1] ? apiToOur(match.team1) : apiToOur(match.team2);
   }
   // Extra time
   if (s.et) {
