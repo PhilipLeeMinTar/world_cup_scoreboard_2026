@@ -7,7 +7,7 @@ import { Participant } from '../types';
 export const INITIAL_PARTICIPANTS: Participant[] = [
   {
     id: 'p_1782747077462_bqcyvhci1',
-    name: 'Wanting',
+    name: 'Wang Ting',
     predictions: [
       { groupName: 'A', champion: 'Mexico', runnerUp: 'South Africa' },
       { groupName: 'B', champion: 'Canada', runnerUp: 'Bosnia and Herzegovina' },

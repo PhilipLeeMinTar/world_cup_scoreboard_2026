@@ -57,7 +57,7 @@ export const KNOCKOUT_PREDICTIONS: KnockoutPrediction[] = [
   },
   {
     participantId: "p_1782747077462_bqcyvhci1",
-    participantName: "Wanting",
+    participantName: "Wang Ting",
     r32Picks: ["Canada", "Germany", "Netherlands", "Brazil", "France", "Ivory Coast", "Mexico", "England", "United States", "Belgium", "Portugal", "Spain", "Switzerland", "Argentina", "Colombia", "Egypt"],
     qfPicks: ["France", "Netherlands", "Brazil", "Mexico", "Spain", "Belgium", "Argentina", "Colombia"],
     sfPicks: ["France", "Spain", "Brazil", "Argentina"],
